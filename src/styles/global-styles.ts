@@ -24,11 +24,12 @@ const GlobalStyles = createGlobalStyle`
     então "obrigo" cada um a usar a font escolhida
   */
   body, input, textarea, select, button {
-    font: 400 1rem 'font-name', sans-serif;
+    font: 400 1rem 'Poppins', sans-serif;
   }
 
   body {
     overflow-x: hidden;
+    background: ${({ theme }) => theme.colors.gray[700]};
   }
 
   button {

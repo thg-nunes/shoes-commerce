@@ -1,8 +1,20 @@
 export const theme = {
-  colors: {},
+  colors: {
+    pink: {
+      300: '#7160C3',
+      400: '#6757AF',
+    },
+    gray: {
+      700: '#1A1921',
+      800: '#16141A',
+    },
+    white: {
+      100: '#FFFFFF',
+    },
+  },
   font: {
     family: {
-      default: "'Open Sans', sans-serif",
+      default: "'Poppins', sans-serif",
     },
     sizes: {
       xsmall: '8rem',
