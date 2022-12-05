@@ -29,7 +29,8 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     overflow-x: hidden;
-    background: ${({ theme }) => theme.colors.gray[700]};
+    color: ${({ theme }) => theme.colors.white[100]};
+    background: ${({ theme }) => theme.colors.gray[800]};
   }
 
   button {
