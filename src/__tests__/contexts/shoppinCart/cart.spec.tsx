@@ -132,4 +132,38 @@ describe('contexts/shoppingCart', () => {
     expect(toastError).toHaveBeenCalledWith(toastMessage, toastCloseIn);
     expect(result.current.items.length).toBe(0);
   });
+
+  it('should call toast.error if product quantity in the cart item is greater than stock quantity', async () => {
+    const productQuantityGreaterThanStockQuantity = {
+      id: '1',
+      quantity: 15,
+    };
+    const toastMessage =
+      'Quantidade no carrinho maior que estoque nosso estoque';
+    const toastCloseIn = { autoClose: 3000 };
+
+    useStateMock
+      .mockReturnValue([
+        [productQuantityGreaterThanStockQuantity],
+        setItemsCart,
+      ])
+      .mockName('useState');
+
+    const { result } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    await act(() => result.current.addItem('1'));
+
+    expect(result.current.items).toEqual(
+      expect.arrayContaining([
+        {
+          id: '1',
+          quantity: 16,
+        },
+      ])
+    );
+
+    expect(toastError).toHaveBeenCalledWith(toastMessage, toastCloseIn);
+  });
 });
