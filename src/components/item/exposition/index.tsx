@@ -7,7 +7,7 @@ export type ItemProps = {
   price: number;
 };
 
-export function Item({ title, price, src }: ItemProps): JSX.Element {
+export function ExpositionItem({ title, price, src }: ItemProps): JSX.Element {
   return (
     <Styled.Container>
       <Styled.Details>

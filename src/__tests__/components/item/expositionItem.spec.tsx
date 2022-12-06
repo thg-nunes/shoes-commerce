@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/react';
 
-import { Item } from '@components/item/exposition';
+import { ExpositionItem } from '@components/item/exposition';
 import { renderTheme } from '@styles/render-theme';
 
 describe('<Item />', () => {
-  it('should ', () => {
+  it('should render item exposition correctly', () => {
     renderTheme(
-      <Item title="tênis de caminhada" price={150} src="/shoes.png" />
+      <ExpositionItem title="tênis de caminhada" price={150} src="/shoes.png" />
     );
 
     const shoesImage = screen.getByAltText('shoes');
