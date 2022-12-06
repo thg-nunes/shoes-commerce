@@ -1,3 +1,4 @@
+import { api } from '@services/axios';
 import { createContext, useContext, useState } from 'react';
 
 type ItemsOfTheCart = {
@@ -7,13 +8,27 @@ type ItemsOfTheCart = {
 
 type CartContextProps = {
   items: ItemsOfTheCart[];
-  addItem: (id: string) => void;
-  removeItem: (id: string) => void;
-  deleteItem: (id: string) => void;
+  addItem: (id: string) => Promise<void>;
+  removeItem: (id: string) => Promise<void>;
+  deleteItem: (id: string) => Promise<void>;
 };
 
 type CartProviderProps = {
   children: React.ReactNode;
+};
+
+type Item = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  stockQuantity: number;
+  brand: string;
+};
+
+type AddItemResponse = {
+  status: 'success' | 'error';
+  items: Item[];
 };
 
 const CartContext = createContext({} as CartContextProps);
@@ -21,11 +36,21 @@ const CartContext = createContext({} as CartContextProps);
 function CartProvider({ children }: CartProviderProps): JSX.Element {
   const [items, setItems] = useState<ItemsOfTheCart[]>([]);
 
-  function addItem(id: string): void {}
+  async function addItem(id: string): Promise<void> {
+    const { data } = await api.get<AddItemResponse>(`/item/${id}`);
 
-  function removeItem(id: string): void {}
+    setItems([
+      ...items,
+      {
+        id,
+        quantity: 1,
+      },
+    ]);
+  }
 
-  function deleteItem(id: string): void {}
+  async function removeItem(id: string): Promise<void> {}
+
+  async function deleteItem(id: string): Promise<void> {}
 
   return (
     <CartContext.Provider value={{ items, addItem, removeItem, deleteItem }}>
