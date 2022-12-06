@@ -7,9 +7,6 @@ import { renderHook } from '@testing-library/react-hooks';
 import { api } from '@services/axios';
 import { CartProvider, useCartContext } from '@contexts/shoppingCart/cart';
 
-const apiMock = new AxiosMock(api);
-const useStateMock = useState as jest.Mock;
-
 jest.mock('react', () => {
   const originalModule = jest.requireActual('react');
 
@@ -21,6 +18,23 @@ jest.mock('react', () => {
       .mockName('useState'),
   };
 });
+// jest.mock('@contexts/shoppingCart/cart', () => {
+//   const originalModule = jest.requireActual('@contexts/shoppingCart/cart');
+
+//   return {
+//     ...originalModule,
+//     useCartContext: jest.fn().mockReturnValue({
+//       items: [],
+//       addItem: jest.fn().mockName('addItem'),
+//       removeItem: jest.fn().mockName('removeItem'),
+//       deleteItem: jest.fn().mockName('deleteItem'),
+//     }),
+//   };
+// });
+
+const apiMock = new AxiosMock(api);
+const useStateMock = useState as jest.Mock;
+const useCartContextMock = useCartContext as jest.Mock;
 
 describe('contexts/shoppingCart', () => {
   const itemId = '1';
@@ -74,5 +88,30 @@ describe('contexts/shoppingCart', () => {
         quantity: 1,
       },
     ]);
+  });
+
+  it('should update item quantity if item to add already exists', async () => {
+    const existingProduct = { id: '1', quantity: 1 };
+
+    useStateMock
+      .mockReturnValueOnce([[existingProduct], setItemsCart])
+      .mockName('useState');
+
+    const { result } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    await act(() => result.current.addItem(existingProduct.id));
+
+    await waitFor(() =>
+      expect(result.current.items).toEqual(
+        expect.arrayContaining([
+          {
+            ...existingProduct,
+            quantity: 2,
+          },
+        ])
+      )
+    );
   });
 });
