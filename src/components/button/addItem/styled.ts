@@ -12,6 +12,7 @@ export const Container = styled.button`
   border: none;
   border-radius: 3px;
   text-transform: uppercase;
+  font-size: 0.75rem;
   font-weight: 600;
   background: ${({ theme }) => theme.colors.pink[300]};
 
