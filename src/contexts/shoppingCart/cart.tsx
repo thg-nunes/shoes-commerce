@@ -1,5 +1,6 @@
 import { api } from '@services/axios';
 import { createContext, useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 
 type ItemsOfTheCart = {
   id: string;
@@ -38,6 +39,16 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
 
   async function addItem(id: string): Promise<void> {
     const { data } = await api.get<AddItemResponse>(`/item/${id}`);
+
+    const requisitionItem = data.items[0];
+
+    if (requisitionItem.stockQuantity <= 0) {
+      toast.error('Quantidade em estoque insuficiente', {
+        autoClose: 3000,
+      });
+
+      return;
+    }
 
     const produtAlreadyExists = items.find((item) => item.id === id);
 
