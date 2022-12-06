@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": "917a6c29-8e04-438d-b34d-4d854c47b1f1",
+      "brand": "Nike",
+      "title": "Tênis de Caminhada Leve Confortável",
+      "description": "Tênis de Caminhada Leve Confortável, bom para você que deseja iniciar uma vida saudável.",
+      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg",
+      "size": 38,
+      "stock": 13,
+      "price": 199.9
+    },
+    {
+      "id": "ca139c56-86c2-40f2-b2ff-91d82d337600",
+      "brand": "Adidas",
+      "title": "Tênis VR Caminhada Confortável Detalhes Couro Masculino.",
+      "description": "Tênis VR Caminhada Confortável Detalhes Couro Masculino, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.",
+      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg",
+      "size": 35,
+      "stock": 9,
+      "price": 139.9
+    },
+    {
+      "id": "56bb9f0e-5d92-483f-8026-d862fd7d4f8a",
+      "brand": "Adidas",
+      "title": "Tênis Adidas Duramo Lite 2.0",
+      "description": "Tênis Adidas Duramo Lite 2.0 Masculino, alem de lindo e confotável, possui boa qualidade e acabamento e também uma boa longividade de vida util.",
+      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis3.jpg",
+      "size": 39,
+      "stock": 11,
+      "price": 219.9
+    }
+  ]
+}
