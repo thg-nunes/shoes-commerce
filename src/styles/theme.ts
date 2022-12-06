@@ -2,7 +2,7 @@ export const theme = {
   colors: {
     pink: {
       300: '#7160C3',
-      400: '#6757AF',
+      400: '#6650A9',
     },
     gray: {
       400: '#8e878e',
