@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import AxiosMock from 'axios-mock-adapter';
 import { act } from 'react-dom/test-utils';
 import { waitFor } from '@testing-library/react';
@@ -18,23 +19,11 @@ jest.mock('react', () => {
       .mockName('useState'),
   };
 });
-// jest.mock('@contexts/shoppingCart/cart', () => {
-//   const originalModule = jest.requireActual('@contexts/shoppingCart/cart');
-
-//   return {
-//     ...originalModule,
-//     useCartContext: jest.fn().mockReturnValue({
-//       items: [],
-//       addItem: jest.fn().mockName('addItem'),
-//       removeItem: jest.fn().mockName('removeItem'),
-//       deleteItem: jest.fn().mockName('deleteItem'),
-//     }),
-//   };
-// });
+jest.mock('react-toastify');
+const toastError = toast.error as jest.Mock;
 
 const apiMock = new AxiosMock(api);
 const useStateMock = useState as jest.Mock;
-const useCartContextMock = useCartContext as jest.Mock;
 
 describe('contexts/shoppingCart', () => {
   const itemId = '1';
@@ -55,6 +44,8 @@ describe('contexts/shoppingCart', () => {
         },
       ],
     });
+
+    useStateMock.mockReturnValue([[], setItemsCart]).mockName('useState');
   });
 
   it('should CartProvider context provider correctly datas', () => {
@@ -113,5 +104,32 @@ describe('contexts/shoppingCart', () => {
         ])
       )
     );
+  });
+
+  it('should call toast.error if product in stock is equal than 0', async () => {
+    apiMock.onGet(`/item/${itemId}`).reply(200, {
+      statusbar: 'success',
+      items: [
+        {
+          id: '1',
+          name: 'fake name',
+          description: 'fake description',
+          price: 18,
+          stockQuantity: 0,
+          brand: 'fake brand',
+        },
+      ],
+    });
+
+    const toastMessage = 'Quantidade em estoque insuficiente';
+    const toastCloseIn = { autoClose: 3000 };
+    const { result } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    await act(() => result.current.addItem('1'));
+
+    expect(toastError).toHaveBeenCalledWith(toastMessage, toastCloseIn);
+    expect(result.current.items.length).toBe(0);
   });
 });
