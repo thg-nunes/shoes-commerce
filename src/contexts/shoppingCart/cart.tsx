@@ -70,6 +70,15 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
       return item;
     });
 
+    if (
+      produtAlreadyExists &&
+      produtAlreadyExists.quantity > requisitionItem.stockQuantity
+    ) {
+      toast.error('Quantidade no carrinho maior que estoque nosso estoque', {
+        autoClose: 3000,
+      });
+    }
+
     setItems([...productQuantityUpdate]);
   }
 
