@@ -39,13 +39,27 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
   async function addItem(id: string): Promise<void> {
     const { data } = await api.get<AddItemResponse>(`/item/${id}`);
 
-    setItems([
-      ...items,
-      {
-        id,
-        quantity: 1,
-      },
-    ]);
+    const produtAlreadyExists = items.find((item) => item.id === id);
+
+    if (!produtAlreadyExists) {
+      setItems([
+        ...items,
+        {
+          id,
+          quantity: 1,
+        },
+      ]);
+    }
+
+    const productQuantityUpdate = items.filter((item) => {
+      if (item.id === id) {
+        item.quantity += 1;
+      }
+
+      return item;
+    });
+
+    setItems([...productQuantityUpdate]);
   }
 
   async function removeItem(id: string): Promise<void> {}
