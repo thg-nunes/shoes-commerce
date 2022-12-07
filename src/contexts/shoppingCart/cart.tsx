@@ -35,10 +35,19 @@ type AddItemResponse = {
 const CartContext = createContext({} as CartContextProps);
 
 function CartProvider({ children }: CartProviderProps): JSX.Element {
-  const [items, setItems] = useState<ItemsOfTheCart[]>([]);
+  const [items, setItems] = useState<ItemsOfTheCart[]>(() => {
+    const itemsStorage = localStorage.getItem('user@listItems');
+
+    if (itemsStorage) {
+      const itemsSaved: ItemsOfTheCart[] = JSON.parse(itemsStorage);
+      return itemsSaved;
+    }
+
+    return [];
+  });
 
   async function addItem(id: string): Promise<void> {
-    const { data } = await api.get<AddItemResponse>(`/item/${id}`);
+    const { data } = await api.get<AddItemResponse>(`/api/item/${id}`);
 
     const requisitionItem = data.items[0];
 
@@ -60,6 +69,17 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
           quantity: 1,
         },
       ]);
+
+      localStorage.setItem(
+        'user@listItems',
+        JSON.stringify([
+          ...items,
+          {
+            id,
+            quantity: 1,
+          },
+        ])
+      );
     }
 
     const productQuantityUpdate = items.filter((item) => {
