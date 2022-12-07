@@ -8,7 +8,7 @@ describe('<Button />', () => {
   const textButton = 'adicionar ao carrinho';
   const actionOnClick = jest.fn().mockName('actionOnClick');
 
-  it('', () => {
+  it('ensures button execute action expected on click', () => {
     renderTheme(
       <Button textButton={textButton} actionOnClick={actionOnClick} />
     );
