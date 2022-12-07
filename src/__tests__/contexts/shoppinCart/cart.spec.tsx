@@ -1,6 +1,7 @@
+import AxiosMock from 'axios-mock-adapter';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import AxiosMock from 'axios-mock-adapter';
+
 import { act } from 'react-dom/test-utils';
 import { waitFor } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
@@ -28,10 +29,13 @@ const useStateMock = useState as jest.Mock;
 describe('contexts/shoppingCart', () => {
   const itemId = '1';
   const initialCartState = [];
+  const initialStorageState = '';
   const setItemsCart = jest.fn().mockName('setItemsCart');
+  const storageGetItemSpy = jest.spyOn(Storage.prototype, 'getItem');
+  const storageSetItemSpy = jest.spyOn(Storage.prototype, 'setItem');
 
   beforeEach(() => {
-    apiMock.onGet(`/item/${itemId}`).reply(200, {
+    apiMock.onGet(`/api/item/${itemId}`).reply(200, {
       statusbar: 'success',
       items: [
         {
@@ -45,10 +49,16 @@ describe('contexts/shoppingCart', () => {
       ],
     });
 
-    useStateMock.mockReturnValue([[], setItemsCart]).mockName('useState');
+    storageGetItemSpy.mockReturnValueOnce(JSON.stringify(initialStorageState));
+
+    // usestate precisa iniciar com o valor salvo no localstorage
+    useStateMock
+      .mockReturnValue([initialCartState, setItemsCart])
+      .mockName('useState');
   });
 
   it('should CartProvider context provider correctly datas', () => {
+    const [items, setItems] = useStateMock();
     const { result } = renderHook(useCartContext, {
       wrapper: CartProvider,
     });
@@ -57,6 +67,9 @@ describe('contexts/shoppingCart', () => {
     expect(result.current).toHaveProperty('addItem');
     expect(result.current).toHaveProperty('removeItem');
     expect(result.current).toHaveProperty('deleteItem');
+
+    expect(storageGetItemSpy).toHaveBeenNthCalledWith(1, 'user@listItems');
+    expect(items).toBe([]);
   });
 
   it('shold add a item in list items', async () => {
@@ -79,6 +92,28 @@ describe('contexts/shoppingCart', () => {
         quantity: 1,
       },
     ]);
+  });
+
+  it('should list items is save in localstorage', async () => {
+    const { result } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    await act(() => result.current.addItem(itemId));
+
+    await waitFor(() => result.current.items.length);
+
+    expect(storageSetItemSpy).toHaveBeenNthCalledWith(
+      1,
+      'user@listItems',
+      JSON.stringify([
+        ...initialCartState,
+        {
+          id: itemId,
+          quantity: 1,
+        },
+      ])
+    );
   });
 
   it('should update item quantity if item to add already exists', async () => {
