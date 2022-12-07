@@ -7,7 +7,7 @@
       "description": "Tênis de Caminhada Leve Confortável, bom para você que deseja iniciar uma vida saudável.",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg",
       "size": 38,
-      "stock": 13,
+      "stockQuantityQuantity": 13,
       "price": 199.9
     },
     {
@@ -17,7 +17,7 @@
       "description": "Tênis VR Caminhada Confortável Detalhes Couro Masculino, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg",
       "size": 35,
-      "stock": 9,
+      "stockQuantityQuantity": 9,
       "price": 139.9
     },
     {
@@ -27,7 +27,7 @@
       "description": "Tênis Adidas Duramo Lite 2.0 Masculino, alem de lindo e confotável, possui boa qualidade e acabamento e também uma boa longividade de vida util.",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis3.jpg",
       "size": 39,
-      "stock": 11,
+      "stockQuantityQuantity": 11,
       "price": 219.9
     }
   ]
