@@ -247,6 +247,7 @@ describe('contexts/shoppingCart', () => {
     expect(toastInfo).toHaveBeenCalledWith('Item removido do carrinho', {
       autoClose: 3000,
     });
+
     expect(setItemsCart).toHaveBeenCalledWith([]);
 
     rerender();
