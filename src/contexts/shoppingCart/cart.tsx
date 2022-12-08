@@ -12,7 +12,7 @@ type CartContextProps = {
   items: ItemsOfTheCart[];
   addItem: (id: string) => Promise<void>;
   removeItem: (id: string) => void;
-  deleteItem: (id: string) => Promise<void>;
+  deleteItem: (id: string) => void;
 };
 
 type CartProviderProps = {
@@ -128,7 +128,17 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
     localStorage.setItem('user@listItems', JSON.stringify(items));
   }
 
-  async function deleteItem(id: string): Promise<void> {}
+  function deleteItem(id: string): void {
+    const itemDeleted = items.filter((item) => item.id !== id);
+
+    setItems([...itemDeleted]);
+
+    toast.warn('Item deleta do carrinho', {
+      autoClose: 3000,
+    });
+
+    localStorage.setItem('user@listItems', JSON.stringify(itemDeleted));
+  }
 
   return (
     <CartContext.Provider value={{ items, addItem, removeItem, deleteItem }}>
