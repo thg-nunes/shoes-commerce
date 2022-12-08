@@ -20,8 +20,11 @@ jest.mock('react', () => {
       .mockName('useState'),
   };
 });
+
 jest.mock('react-toastify');
+
 const toastError = toast.error as jest.Mock;
+const toastWarn = toast.warn as jest.Mock;
 const toastInfo = toast.info as jest.Mock;
 
 const apiMock = new AxiosMock(api);
@@ -253,5 +256,55 @@ describe('contexts/shoppingCart', () => {
     rerender();
 
     expect(result.current.items).toEqual([]);
+  });
+
+  it('ensures that item is deleted, localstorage is updated and toast.warn is called', async () => {
+    useStateMock.mockReturnValueOnce([
+      [
+        { id: '1', quantity: 3 },
+        { id: '2', quantity: 4 },
+        { id: '3', quantity: 2 },
+      ],
+      setItemsCart,
+    ]);
+
+    const { result, rerender } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    await waitFor(() => result.current.deleteItem('1'));
+
+    expect(setItemsCart).toHaveBeenCalledWith([
+      { id: '2', quantity: 4 },
+      { id: '3', quantity: 2 },
+    ]);
+
+    expect(toastWarn).toHaveBeenCalledWith('Item deleta do carrinho', {
+      autoClose: 3000,
+    });
+
+    expect(storageSetItemSpy).toHaveBeenCalledWith(
+      'user@listItems',
+      JSON.stringify([
+        { id: '2', quantity: 4 },
+        { id: '3', quantity: 2 },
+      ])
+    );
+
+    useStateMock.mockReturnValueOnce([
+      [
+        { id: '2', quantity: 4 },
+        { id: '3', quantity: 2 },
+      ],
+      setItemsCart,
+    ]);
+
+    rerender();
+
+    await waitFor(() => result.current.deleteItem('2'));
+
+    expect(result.current.items).toEqual(
+      expect.arrayContaining([{ id: '3', quantity: 2 }])
+    );
   });
 });
