@@ -104,15 +104,26 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
   }
 
   function removeItem(id: string): void {
-    const itemRemovedQuantity = items.filter((item) => {
-      if (item.id === id) {
-        item.quantity -= 1;
-      }
+    const existsItemInTheCartList = items.find((item) => item.id === id);
 
-      return item;
-    });
+    if (existsItemInTheCartList.quantity - 1 <= 0) {
+      toast.info('Item removido do carrinho', {
+        autoClose: 3000,
+      });
+      setItems(items.filter((item) => item.id !== id));
+    }
 
-    setItems([...itemRemovedQuantity]);
+    if (existsItemInTheCartList.quantity - 1 > 0) {
+      const itemRemovedQuantity = items.filter((item) => {
+        if (item.id === id) {
+          item.quantity -= 1;
+        }
+
+        return item;
+      });
+
+      setItems([...itemRemovedQuantity]);
+    }
 
     localStorage.setItem('user@listItems', JSON.stringify(items));
   }
