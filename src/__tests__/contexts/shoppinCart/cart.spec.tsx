@@ -31,7 +31,7 @@ describe('contexts/shoppingCart', () => {
   const initialCartState = [];
   const initialStorageState = '';
   const setItemsCart = jest.fn().mockName('setItemsCart');
-  const storageGetItemSpy = jest.spyOn(Storage.prototype, 'getItem');
+
   const storageSetItemSpy = jest.spyOn(Storage.prototype, 'setItem');
 
   beforeEach(() => {
@@ -49,7 +49,9 @@ describe('contexts/shoppingCart', () => {
       ],
     });
 
-    storageGetItemSpy.mockReturnValueOnce(JSON.stringify(initialStorageState));
+    jest
+      .spyOn(Storage.prototype, 'getItem')
+      .mockReturnValueOnce(JSON.stringify(initialStorageState));
 
     // usestate precisa iniciar com o valor salvo no localstorage
     useStateMock
@@ -58,7 +60,6 @@ describe('contexts/shoppingCart', () => {
   });
 
   it('should CartProvider context provider correctly datas', () => {
-    const [items, setItems] = useStateMock();
     const { result } = renderHook(useCartContext, {
       wrapper: CartProvider,
     });
@@ -67,9 +68,14 @@ describe('contexts/shoppingCart', () => {
     expect(result.current).toHaveProperty('addItem');
     expect(result.current).toHaveProperty('removeItem');
     expect(result.current).toHaveProperty('deleteItem');
+  });
 
-    expect(storageGetItemSpy).toHaveBeenNthCalledWith(1, 'user@listItems');
-    expect(items).toBe([]);
+  it('ensures that the initial state of the itmes is the localstorage value', () => {
+    const { result } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    expect(result.current.items).toEqual([]);
   });
 
   it('shold add a item in list items', async () => {
@@ -142,7 +148,7 @@ describe('contexts/shoppingCart', () => {
   });
 
   it('should call toast.error if product in stock is equal than 0', async () => {
-    apiMock.onGet(`/item/${itemId}`).reply(200, {
+    apiMock.onGet(`/api/item/${itemId}`).reply(200, {
       statusbar: 'success',
       items: [
         {
