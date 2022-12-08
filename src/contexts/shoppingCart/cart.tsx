@@ -1,6 +1,7 @@
-import { api } from '@services/axios';
-import { createContext, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
+import { api } from '@services/axios';
 
 type ItemsOfTheCart = {
   id: string;
@@ -35,16 +36,18 @@ type AddItemResponse = {
 const CartContext = createContext({} as CartContextProps);
 
 function CartProvider({ children }: CartProviderProps): JSX.Element {
-  const [items, setItems] = useState<ItemsOfTheCart[]>(() => {
+  const [items, setItems] = useState<ItemsOfTheCart[]>([]);
+
+  useEffect(() => {
     const itemsStorage = localStorage.getItem('user@listItems');
 
     if (itemsStorage) {
       const itemsSaved: ItemsOfTheCart[] = JSON.parse(itemsStorage);
-      return itemsSaved;
+      setItems(itemsSaved);
     }
 
-    return [];
-  });
+    setItems([]);
+  }, []);
 
   async function addItem(id: string): Promise<void> {
     const { data } = await api.get<AddItemResponse>(`/api/item/${id}`);
