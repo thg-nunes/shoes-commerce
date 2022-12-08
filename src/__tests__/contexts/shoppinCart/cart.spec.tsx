@@ -22,6 +22,7 @@ jest.mock('react', () => {
 });
 jest.mock('react-toastify');
 const toastError = toast.error as jest.Mock;
+const toastInfo = toast.info as jest.Mock;
 
 const apiMock = new AxiosMock(api);
 const useStateMock = useState as jest.Mock;
@@ -229,5 +230,27 @@ describe('contexts/shoppingCart', () => {
       'user@listItems',
       JSON.stringify([{ id: '1', quantity: 3 }])
     );
+  });
+
+  it('ensures that if item quantity less or equal than 0 toast.info is called and item is removed of the list', async () => {
+    useStateMock.mockReturnValueOnce([
+      [{ id: '1', quantity: 0 }],
+      setItemsCart,
+    ]);
+
+    const { result, rerender } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    await waitFor(() => result.current.removeItem('1'));
+
+    expect(toastInfo).toHaveBeenCalledWith('Item removido do carrinho', {
+      autoClose: 3000,
+    });
+    expect(setItemsCart).toHaveBeenCalledWith([]);
+
+    rerender();
+
+    expect(result.current.items).toEqual([]);
   });
 });
