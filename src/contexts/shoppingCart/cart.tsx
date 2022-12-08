@@ -11,7 +11,7 @@ type ItemsOfTheCart = {
 type CartContextProps = {
   items: ItemsOfTheCart[];
   addItem: (id: string) => Promise<void>;
-  removeItem: (id: string) => Promise<void>;
+  removeItem: (id: string) => void;
   deleteItem: (id: string) => Promise<void>;
 };
 
@@ -45,8 +45,6 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
       const itemsSaved: ItemsOfTheCart[] = JSON.parse(itemsStorage);
       setItems(itemsSaved);
     }
-
-    setItems([]);
   }, []);
 
   async function addItem(id: string): Promise<void> {
@@ -105,7 +103,19 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
     setItems([...productQuantityUpdate]);
   }
 
-  async function removeItem(id: string): Promise<void> {}
+  function removeItem(id: string): void {
+    const itemRemovedQuantity = items.filter((item) => {
+      if (item.id === id) {
+        item.quantity -= 1;
+      }
+
+      return item;
+    });
+
+    setItems([...itemRemovedQuantity]);
+
+    localStorage.setItem('user@listItems', JSON.stringify(items));
+  }
 
   async function deleteItem(id: string): Promise<void> {}
 
