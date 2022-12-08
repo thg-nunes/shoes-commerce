@@ -29,7 +29,6 @@ const useStateMock = useState as jest.Mock;
 describe('contexts/shoppingCart', () => {
   const itemId = '1';
   const initialCartState = [];
-  const initialStorageState = '';
   const setItemsCart = jest.fn().mockName('setItemsCart');
 
   const storageSetItemSpy = jest.spyOn(Storage.prototype, 'setItem');
@@ -49,9 +48,7 @@ describe('contexts/shoppingCart', () => {
       ],
     });
 
-    jest
-      .spyOn(Storage.prototype, 'getItem')
-      .mockReturnValueOnce(JSON.stringify(initialStorageState));
+    jest.spyOn(Storage.prototype, 'getItem').mockReturnValueOnce(null);
 
     // usestate precisa iniciar com o valor salvo no localstorage
     useStateMock
@@ -206,5 +203,31 @@ describe('contexts/shoppingCart', () => {
     );
 
     expect(toastError).toHaveBeenCalledWith(toastMessage, toastCloseIn);
+  });
+
+  it('ensures that a unit is removed of the product and the new value is saved in the localstorage', async () => {
+    useStateMock.mockReturnValueOnce([
+      [{ id: '1', quantity: 4 }],
+      setItemsCart,
+    ]);
+
+    const { result } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    await waitFor(() => result.current.removeItem('1'));
+
+    expect(setItemsCart).toHaveBeenCalledWith([{ id: '1', quantity: 3 }]);
+
+    await waitFor(() =>
+      expect(result.current.items).toEqual(
+        expect.arrayContaining([{ id: '1', quantity: 3 }])
+      )
+    );
+
+    expect(storageSetItemSpy).toHaveBeenCalledWith(
+      'user@listItems',
+      JSON.stringify([{ id: '1', quantity: 3 }])
+    );
   });
 });
