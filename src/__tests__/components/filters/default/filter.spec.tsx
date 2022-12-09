@@ -1,6 +1,7 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 
 import { searchItem } from '@utils/searchItem';
+
 import { DefaultFilter } from '@components/filters/default';
 
 import { renderTheme } from '@styles/render-theme';
