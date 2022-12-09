@@ -8,7 +8,7 @@ module.exports = {
     '!src/**/*_app.tsx',
     '!src/**/*_document.tsx',
     '!<rootDir>/src/pages/api/**/*.{js,jsx,ts,tsx}',
-    '!<rootDir>/src/**/*.{js,ts}',
+    '!<rootDir>/src/components/**/*.{js,ts}',
     '!<rootDir>/src/styles/**/*.{js,jsx,ts,tsx}',
     '!<rootDir>/src/services  /**/*.{js,jsx,ts,tsx}',
     '!<rootDir>/**/*.stories.{js,jsx,ts,tsx}',
