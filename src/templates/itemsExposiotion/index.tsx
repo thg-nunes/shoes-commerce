@@ -3,7 +3,7 @@ import { Pagination } from '@components/pagination';
 import { useEffect, useState } from 'react';
 import * as Styled from './styled';
 
-type ItemsList = {
+export type ItemsList = {
   id: string;
   brand: string;
   title: string;
@@ -21,7 +21,6 @@ export type ItemsExpositionProps = {
 export function ItemsExposition({
   itemsList,
 }: ItemsExpositionProps): JSX.Element {
-  const [items] = useState(itemsList);
   const [itemsOfThePage, setItemsOfThePage] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
@@ -30,10 +29,10 @@ export function ItemsExposition({
     const init_slice = currentPage === 1 ? 0 : itemsPerPage;
     const end_slice = currentPage === 1 ? itemsPerPage : itemsPerPage * 2;
 
-    const itemsToExposition = items.slice(init_slice, end_slice);
+    const itemsToExposition = itemsList.slice(init_slice, end_slice);
 
     setItemsOfThePage(itemsToExposition);
-  }, [currentPage]);
+  }, [currentPage, itemsList]);
 
   return (
     <Styled.Container>
