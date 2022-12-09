@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import { api } from '@services/axios';
 
-type ItemsOfTheCart = {
+export type ItemsOfTheCart = {
   id: string;
   quantity: number;
 };
