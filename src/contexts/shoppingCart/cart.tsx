@@ -81,6 +81,8 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
           },
         ])
       );
+
+      return;
     }
 
     const productQuantityUpdate = items.filter((item) => {
@@ -101,6 +103,11 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
     }
 
     setItems([...productQuantityUpdate]);
+
+    localStorage.setItem(
+      'user@listItems',
+      JSON.stringify(productQuantityUpdate)
+    );
   }
 
   function removeItem(id: string): void {
