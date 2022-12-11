@@ -1,7 +1,6 @@
 import { api } from '@services/axios';
 
 import { ItemsList } from '@templates/itemsExposiotion';
-import { info } from 'console';
 
 type SearchItemByIdProps = {
   id: string | string[];
