@@ -1,8 +1,9 @@
-import { api } from '@services/axios';
-import { createContext, useContext, useState } from 'react';
 import { toast } from 'react-toastify';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type ItemsOfTheCart = {
+import { api } from '@services/axios';
+
+export type ItemsOfTheCart = {
   id: string;
   quantity: number;
 };
@@ -10,8 +11,8 @@ type ItemsOfTheCart = {
 type CartContextProps = {
   items: ItemsOfTheCart[];
   addItem: (id: string) => Promise<void>;
-  removeItem: (id: string) => Promise<void>;
-  deleteItem: (id: string) => Promise<void>;
+  removeItem: (id: string) => void;
+  deleteItem: (id: string) => void;
 };
 
 type CartProviderProps = {
@@ -35,16 +36,16 @@ type AddItemResponse = {
 const CartContext = createContext({} as CartContextProps);
 
 function CartProvider({ children }: CartProviderProps): JSX.Element {
-  const [items, setItems] = useState<ItemsOfTheCart[]>(() => {
+  const [items, setItems] = useState<ItemsOfTheCart[]>([]);
+
+  useEffect(() => {
     const itemsStorage = localStorage.getItem('user@listItems');
 
     if (itemsStorage) {
       const itemsSaved: ItemsOfTheCart[] = JSON.parse(itemsStorage);
-      return itemsSaved;
+      setItems(itemsSaved);
     }
-
-    return [];
-  });
+  }, []);
 
   async function addItem(id: string): Promise<void> {
     const { data } = await api.get<AddItemResponse>(`/api/item/${id}`);
@@ -80,6 +81,8 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
           },
         ])
       );
+
+      return;
     }
 
     const productQuantityUpdate = items.filter((item) => {
@@ -100,11 +103,49 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
     }
 
     setItems([...productQuantityUpdate]);
+
+    localStorage.setItem(
+      'user@listItems',
+      JSON.stringify(productQuantityUpdate)
+    );
   }
 
-  async function removeItem(id: string): Promise<void> {}
+  function removeItem(id: string): void {
+    const existsItemInTheCartList = items.find((item) => item.id === id);
 
-  async function deleteItem(id: string): Promise<void> {}
+    if (existsItemInTheCartList.quantity - 1 <= 0) {
+      toast.info('Item removido do carrinho', {
+        autoClose: 3000,
+      });
+      setItems(items.filter((item) => item.id !== id));
+    }
+
+    if (existsItemInTheCartList.quantity - 1 > 0) {
+      const itemRemovedQuantity = items.filter((item) => {
+        if (item.id === id) {
+          item.quantity -= 1;
+        }
+
+        return item;
+      });
+
+      setItems([...itemRemovedQuantity]);
+    }
+
+    localStorage.setItem('user@listItems', JSON.stringify(items));
+  }
+
+  function deleteItem(id: string): void {
+    const itemDeleted = items.filter((item) => item.id !== id);
+
+    setItems([...itemDeleted]);
+
+    toast.warn('Item deleta do carrinho', {
+      autoClose: 3000,
+    });
+
+    localStorage.setItem('user@listItems', JSON.stringify(itemDeleted));
+  }
 
   return (
     <CartContext.Provider value={{ items, addItem, removeItem, deleteItem }}>

@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 270px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+
+  max-width: 300px;
   background: white;
 
   color: black;
@@ -26,9 +30,4 @@ export const Details = styled.section`
 
 export const Price = styled.p`
   font-size: 1.4rem;
-`;
-
-export const ShoesDetailsSection = styled.section`
-  display: flex;
-  flex-direction: column;
 `;

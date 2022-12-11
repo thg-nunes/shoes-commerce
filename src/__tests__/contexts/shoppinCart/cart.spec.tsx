@@ -20,8 +20,12 @@ jest.mock('react', () => {
       .mockName('useState'),
   };
 });
+
 jest.mock('react-toastify');
+
 const toastError = toast.error as jest.Mock;
+const toastWarn = toast.warn as jest.Mock;
+const toastInfo = toast.info as jest.Mock;
 
 const apiMock = new AxiosMock(api);
 const useStateMock = useState as jest.Mock;
@@ -29,9 +33,8 @@ const useStateMock = useState as jest.Mock;
 describe('contexts/shoppingCart', () => {
   const itemId = '1';
   const initialCartState = [];
-  const initialStorageState = '';
   const setItemsCart = jest.fn().mockName('setItemsCart');
-  const storageGetItemSpy = jest.spyOn(Storage.prototype, 'getItem');
+
   const storageSetItemSpy = jest.spyOn(Storage.prototype, 'setItem');
 
   beforeEach(() => {
@@ -49,7 +52,7 @@ describe('contexts/shoppingCart', () => {
       ],
     });
 
-    storageGetItemSpy.mockReturnValueOnce(JSON.stringify(initialStorageState));
+    jest.spyOn(Storage.prototype, 'getItem').mockReturnValueOnce(null);
 
     // usestate precisa iniciar com o valor salvo no localstorage
     useStateMock
@@ -58,7 +61,6 @@ describe('contexts/shoppingCart', () => {
   });
 
   it('should CartProvider context provider correctly datas', () => {
-    const [items, setItems] = useStateMock();
     const { result } = renderHook(useCartContext, {
       wrapper: CartProvider,
     });
@@ -67,9 +69,14 @@ describe('contexts/shoppingCart', () => {
     expect(result.current).toHaveProperty('addItem');
     expect(result.current).toHaveProperty('removeItem');
     expect(result.current).toHaveProperty('deleteItem');
+  });
 
-    expect(storageGetItemSpy).toHaveBeenNthCalledWith(1, 'user@listItems');
-    expect(items).toBe([]);
+  it('ensures that the initial state of the itmes is the localstorage value', () => {
+    const { result } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    expect(result.current.items).toEqual([]);
   });
 
   it('shold add a item in list items', async () => {
@@ -142,7 +149,7 @@ describe('contexts/shoppingCart', () => {
   });
 
   it('should call toast.error if product in stock is equal than 0', async () => {
-    apiMock.onGet(`/item/${itemId}`).reply(200, {
+    apiMock.onGet(`/api/item/${itemId}`).reply(200, {
       statusbar: 'success',
       items: [
         {
@@ -200,5 +207,104 @@ describe('contexts/shoppingCart', () => {
     );
 
     expect(toastError).toHaveBeenCalledWith(toastMessage, toastCloseIn);
+  });
+
+  it('ensures that a unit is removed of the product and the new value is saved in the localstorage', async () => {
+    useStateMock.mockReturnValueOnce([
+      [{ id: '1', quantity: 4 }],
+      setItemsCart,
+    ]);
+
+    const { result } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    await waitFor(() => result.current.removeItem('1'));
+
+    expect(setItemsCart).toHaveBeenCalledWith([{ id: '1', quantity: 3 }]);
+
+    await waitFor(() =>
+      expect(result.current.items).toEqual(
+        expect.arrayContaining([{ id: '1', quantity: 3 }])
+      )
+    );
+
+    expect(storageSetItemSpy).toHaveBeenCalledWith(
+      'user@listItems',
+      JSON.stringify([{ id: '1', quantity: 3 }])
+    );
+  });
+
+  it('ensures that if item quantity less or equal than 0 toast.info is called and item is removed of the list', async () => {
+    useStateMock.mockReturnValueOnce([
+      [{ id: '1', quantity: 0 }],
+      setItemsCart,
+    ]);
+
+    const { result, rerender } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    await waitFor(() => result.current.removeItem('1'));
+
+    expect(toastInfo).toHaveBeenCalledWith('Item removido do carrinho', {
+      autoClose: 3000,
+    });
+
+    expect(setItemsCart).toHaveBeenCalledWith([]);
+
+    rerender();
+
+    expect(result.current.items).toEqual([]);
+  });
+
+  it('ensures that item is deleted, localstorage is updated and toast.warn is called', async () => {
+    useStateMock.mockReturnValueOnce([
+      [
+        { id: '1', quantity: 3 },
+        { id: '2', quantity: 4 },
+        { id: '3', quantity: 2 },
+      ],
+      setItemsCart,
+    ]);
+
+    const { result, rerender } = renderHook(useCartContext, {
+      wrapper: CartProvider,
+    });
+
+    await waitFor(() => result.current.deleteItem('1'));
+
+    expect(setItemsCart).toHaveBeenCalledWith([
+      { id: '2', quantity: 4 },
+      { id: '3', quantity: 2 },
+    ]);
+
+    expect(toastWarn).toHaveBeenCalledWith('Item deleta do carrinho', {
+      autoClose: 3000,
+    });
+
+    expect(storageSetItemSpy).toHaveBeenCalledWith(
+      'user@listItems',
+      JSON.stringify([
+        { id: '2', quantity: 4 },
+        { id: '3', quantity: 2 },
+      ])
+    );
+
+    useStateMock.mockReturnValueOnce([
+      [
+        { id: '2', quantity: 4 },
+        { id: '3', quantity: 2 },
+      ],
+      setItemsCart,
+    ]);
+
+    rerender();
+
+    await waitFor(() => result.current.deleteItem('2'));
+
+    expect(result.current.items).toEqual(
+      expect.arrayContaining([{ id: '3', quantity: 2 }])
+    );
   });
 });
