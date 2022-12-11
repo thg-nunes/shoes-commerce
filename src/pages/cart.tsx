@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 
-import { ItemsList } from '@templates/itemsExposiotion';
 import { searchItemById } from '@utils/searchItemById';
 
 import * as Styled from '@styles/pages/cart/styled';
@@ -10,8 +10,19 @@ type StorageItems = {
   quantity: number;
 }[];
 
+type ItemListPriceUpdate = {
+  id: string;
+  brand: string;
+  title: string;
+  description: string;
+  image: string;
+  size: number;
+  stock: number;
+  price: string;
+}[];
+
 export default function Cart(): JSX.Element {
-  const [itemsById, setItemsById] = useState<ItemsList>([]);
+  const [itemsById, setItemsById] = useState<ItemListPriceUpdate>([]);
 
   useEffect(() => {
     const productsId: string[] = [];
@@ -23,7 +34,19 @@ export default function Cart(): JSX.Element {
     const getItemsById = async (): Promise<void> => {
       const response = await searchItemById({ id: productsId });
 
-      setItemsById(response.items);
+      const formatePrice = response.items.map((item) => {
+        const price = new Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        }).format(item.price);
+
+        return {
+          ...item,
+          price,
+        };
+      });
+
+      setItemsById(formatePrice);
     };
 
     getItemsById();
@@ -36,12 +59,12 @@ export default function Cart(): JSX.Element {
           <Styled.TableRow>
             <th />
             <th>PRODUTO</th>
-            <th>QStyled.TableData</th>
+            <th>QTD</th>
             <th>SUBTOTAL</th>
           </Styled.TableRow>
         </Styled.TableHead>
 
-        <tbody>
+        <Styled.TableBody>
           {itemsById.map((item) => (
             <Styled.TableRow key={item.id}>
               <Styled.TableData>
@@ -52,16 +75,18 @@ export default function Cart(): JSX.Element {
                 <span>{item.price}</span>
               </Styled.TableData>
               <Styled.TableData>
-                <button type="button">-</button>
-                <input type="text" name="items quantity" />
-                <button type="button">+</button>
+                <Styled.SectionUpdateProductQuantity>
+                  <AiOutlineMinusCircle size={25} fill="#7160C3" />
+                  <span>2</span>
+                  <AiOutlinePlusCircle size={25} fill="#7160C3" />
+                </Styled.SectionUpdateProductQuantity>
               </Styled.TableData>
               <Styled.TableData>
                 <span>{item.price}</span>
               </Styled.TableData>
             </Styled.TableRow>
           ))}
-        </tbody>
+        </Styled.TableBody>
       </Styled.Table>
     </Styled.Container>
   );
