@@ -52,10 +52,10 @@ export default function Cart(): JSX.Element {
     };
 
     if (userItemsListJson.length) getItemsById();
-  }, []);
+  }, [items]);
 
   return (
-    <Styled.Container hasItemInCartList={!!itemsById.length}>
+    <Styled.Container hasItemInCartList={!!items.length}>
       <Styled.Table>
         <Styled.TableHead>
           <Styled.TableRow>

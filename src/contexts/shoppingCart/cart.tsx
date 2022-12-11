@@ -125,7 +125,7 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
       return;
     }
 
-    if (existsItemInTheCartList.quantity - 1 > 0) {
+    if (existsItemInTheCartList && existsItemInTheCartList.quantity - 1 > 0) {
       const itemRemovedQuantity = items.filter((item) => {
         if (item.id === id) {
           item.quantity -= 1;
