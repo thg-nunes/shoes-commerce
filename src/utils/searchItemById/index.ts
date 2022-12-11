@@ -1,6 +1,7 @@
 import { api } from '@services/axios';
 
 import { ItemsList } from '@templates/itemsExposiotion';
+import { info } from 'console';
 
 type SearchItemByIdProps = {
   id: string | string[];
@@ -14,9 +15,13 @@ type Response = {
 const searchItemById = async ({
   id,
 }: SearchItemByIdProps): Promise<Response> => {
-  const { data } = await api.get<Response>(`/api/item/${id}`);
+  try {
+    const { data } = await api.get<Response>(`/api/item/${id}`);
 
-  return data;
+    return data;
+  } catch {
+    return { status: 'success', items: [] };
+  }
 };
 
 export { searchItemById };
