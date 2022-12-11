@@ -1,6 +1,8 @@
-import { ExpositionItem } from '@components/item/exposition';
-import { Pagination } from '@components/pagination';
 import { useEffect, useState } from 'react';
+
+import { Pagination } from '@components/pagination';
+import { ExpositionItem } from '@components/item/exposition';
+
 import * as Styled from './styled';
 
 export type ItemsList = {
@@ -11,7 +13,7 @@ export type ItemsList = {
   image: string;
   size: number;
   stock: number;
-  price: number;
+  price: number | string;
 }[];
 
 export type ItemsExpositionProps = {
@@ -21,7 +23,7 @@ export type ItemsExpositionProps = {
 export function ItemsExposition({
   itemsList,
 }: ItemsExpositionProps): JSX.Element {
-  const [itemsOfThePage, setItemsOfThePage] = useState([]);
+  const [itemsOfThePage, setItemsOfThePage] = useState<ItemsList>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12);
 
@@ -30,8 +32,15 @@ export function ItemsExposition({
     const end_slice = currentPage === 1 ? itemsPerPage : itemsPerPage * 2;
 
     const itemsToExposition = itemsList.slice(init_slice, end_slice);
+    const itemsToExpositionUpdatePrice = itemsToExposition.map((item) => ({
+      ...item,
+      price: new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(Number(item.price)),
+    }));
 
-    setItemsOfThePage(itemsToExposition);
+    setItemsOfThePage(itemsToExpositionUpdatePrice);
   }, [currentPage, itemsList]);
 
   return (
