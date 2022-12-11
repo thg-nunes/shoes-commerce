@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 
 import { searchItemById } from '@utils/searchItemById';
+import { useCartContext } from '@contexts/shoppingCart/cart';
 
 import * as Styled from '@styles/pages/cart/styled';
 
@@ -22,6 +23,7 @@ type ItemListPriceUpdate = {
 }[];
 
 export default function Cart(): JSX.Element {
+  const { items, addItem, removeItem } = useCartContext();
   const [itemsById, setItemsById] = useState<ItemListPriceUpdate>([]);
 
   useEffect(() => {
@@ -49,11 +51,11 @@ export default function Cart(): JSX.Element {
       setItemsById(formatePrice);
     };
 
-    getItemsById();
+    if (userItemsListJson.length) getItemsById();
   }, []);
 
   return (
-    <Styled.Container>
+    <Styled.Container hasItemInCartList={!!itemsById.length}>
       <Styled.Table>
         <Styled.TableHead>
           <Styled.TableRow>
@@ -65,7 +67,7 @@ export default function Cart(): JSX.Element {
         </Styled.TableHead>
 
         <Styled.TableBody>
-          {itemsById.map((item) => (
+          {itemsById.map((item, index) => (
             <Styled.TableRow key={item.id}>
               <Styled.TableData>
                 <img src={item.image} alt="shoes" />
@@ -76,9 +78,17 @@ export default function Cart(): JSX.Element {
               </Styled.TableData>
               <Styled.TableData>
                 <Styled.SectionUpdateProductQuantity>
-                  <AiOutlineMinusCircle size={25} fill="#7160C3" />
-                  <span>2</span>
-                  <AiOutlinePlusCircle size={25} fill="#7160C3" />
+                  <AiOutlineMinusCircle
+                    size={25}
+                    fill="#7160C3"
+                    onClick={() => removeItem(item.id)}
+                  />
+                  <span>{items[index]?.quantity || 0}</span>
+                  <AiOutlinePlusCircle
+                    size={25}
+                    fill="#7160C3"
+                    onClick={() => addItem(item.id)}
+                  />
                 </Styled.SectionUpdateProductQuantity>
               </Styled.TableData>
               <Styled.TableData>
