@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const Container = styled.main`
+type MainProps = {
+  hasItemInCartList: boolean;
+};
+
+export const Container = styled.main<MainProps>`
+  display: ${({ hasItemInCartList }) => (hasItemInCartList ? 'block' : 'none')};
   max-width: 1280px;
   margin: 0 auto;
 
@@ -56,5 +61,9 @@ export const SectionUpdateProductQuantity = styled.section`
     padding-left: 0.5rem;
     border: 1px solid ${({ theme }) => theme.colors.gray[250]};
     border-radius: 2px;
+  }
+
+  svg {
+    cursor: pointer;
   }
 `;
