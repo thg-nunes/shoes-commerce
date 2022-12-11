@@ -4,7 +4,7 @@ import * as Styled from './styled';
 
 export type ButtonProps = {
   textButton: string;
-  quantityItemInCart?: number;
+  quantityItemInCart?: () => number;
   actionOnClick?: () => void;
 };
 
@@ -17,7 +17,7 @@ export function Button({
     <Styled.Container onClick={actionOnClick}>
       <span>
         <BsCartPlusFill size={20} fill="#FFFFFF" name="add-item-icon" />
-        {quantityItemInCart || 0}
+        {quantityItemInCart() || 0}
       </span>
       {textButton}
     </Styled.Container>
