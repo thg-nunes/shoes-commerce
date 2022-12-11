@@ -1,3 +1,5 @@
+import { Button as ButtonStyle } from '@components/button/paginationComponent/styled';
+
 import styled from 'styled-components';
 
 type MainProps = {
@@ -45,6 +47,30 @@ export const TableData = styled.td`
   }
 `;
 
+export const TableFooter = styled.tfoot`
+  color: ${({ theme }) => theme.colors.gray[800]};
+  font-weight: 600;
+
+  td:last-child {
+    font-size: 1.7rem;
+
+    span {
+      font-size: 1.1rem;
+      color: ${({ theme }) => theme.colors.gray[250]};
+    }
+  }
+`;
+
+export const Button = styled(ButtonStyle)`
+  font-weight: 600;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+
+  :hover {
+    background: ${({ theme }) => theme.colors.pink[300]};
+  }
+`;
+
 export const SectionUpdateProductQuantity = styled.section`
   display: flex;
   align-items: center;
@@ -62,6 +88,19 @@ export const SectionUpdateProductQuantity = styled.section`
     border: 1px solid ${({ theme }) => theme.colors.gray[250]};
     border-radius: 2px;
   }
+
+  svg {
+    cursor: pointer;
+  }
+`;
+
+export const SectionSubtotal = styled.section`
+  width: 77%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
 
   svg {
     cursor: pointer;
