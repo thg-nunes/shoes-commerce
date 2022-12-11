@@ -1,12 +1,13 @@
 import { Button } from '@components/button/addItem';
-import { useCartContext } from '@contexts/shoppingCart/cart';
+import { ItemsOfTheCart, useCartContext } from '@contexts/shoppingCart/cart';
+import { useEffect, useState } from 'react';
 import * as Styled from './styled';
 
 export type ItemProps = {
   id: string;
   title: string;
   src: string;
-  price: number;
+  price: string | number;
 };
 
 export function ExpositionItem({
@@ -15,7 +16,21 @@ export function ExpositionItem({
   src,
   id,
 }: ItemProps): JSX.Element {
-  const { addItem } = useCartContext();
+  const { items, addItem } = useCartContext();
+  const [itemsSaved, setItemsSaved] = useState<ItemsOfTheCart[]>([]);
+
+  useEffect(() => {
+    const itemsSavedInList = localStorage.getItem('user@listItems');
+    const itemsSavedInListToJson: ItemsOfTheCart[] =
+      JSON.parse(itemsSavedInList);
+    setItemsSaved(itemsSavedInListToJson);
+  }, [items]);
+
+  function getItemQuantityInList(): number {
+    const itemOfList = itemsSaved.find((item) => item.id === id);
+
+    return itemOfList?.quantity;
+  }
 
   return (
     <Styled.Container>
@@ -25,6 +40,7 @@ export function ExpositionItem({
         <Styled.Price>R$ {price}</Styled.Price>
       </Styled.Details>
       <Button
+        quantityItemInCart={() => getItemQuantityInList()}
         textButton="adicionar ao carrinho"
         actionOnClick={async () => {
           await addItem(id);
