@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react';
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
+import {
+  AiOutlineMinusCircle,
+  AiOutlinePlusCircle,
+  AiTwotoneDelete,
+} from 'react-icons/ai';
+
+import { ItemsList } from '@templates/itemsExposiotion';
 
 import { searchItemById } from '@utils/searchItemById';
+import { useReturnTotalPriceOfItems } from '@utils/totalPriceOfItems';
 import { useCartContext } from '@contexts/shoppingCart/cart';
 
 import * as Styled from '@styles/pages/cart/styled';
@@ -11,7 +18,7 @@ type StorageItems = {
   quantity: number;
 }[];
 
-type ItemListPriceUpdate = {
+export type ItemListPriceUpdate = {
   id: string;
   brand: string;
   title: string;
@@ -23,8 +30,12 @@ type ItemListPriceUpdate = {
 }[];
 
 export default function Cart(): JSX.Element {
-  const { items, addItem, removeItem } = useCartContext();
+  const { items, addItem, removeItem, deleteItem } = useCartContext();
+  const [itemsData, setItemsData] = useState<ItemsList>([]);
   const [itemsById, setItemsById] = useState<ItemListPriceUpdate>([]);
+  const totalPriceOfList = useReturnTotalPriceOfItems({
+    itemsData,
+  });
 
   useEffect(() => {
     const productsId: string[] = [];
@@ -35,12 +46,13 @@ export default function Cart(): JSX.Element {
 
     const getItemsById = async (): Promise<void> => {
       const response = await searchItemById({ id: productsId });
+      setItemsData(response.items);
 
       const formatePrice = response.items.map((item) => {
         const price = new Intl.NumberFormat('pt-BR', {
           style: 'currency',
           currency: 'BRL',
-        }).format(item.price);
+        }).format(Number(item.price));
 
         return {
           ...item,
@@ -92,11 +104,32 @@ export default function Cart(): JSX.Element {
                 </Styled.SectionUpdateProductQuantity>
               </Styled.TableData>
               <Styled.TableData>
-                <span>{item.price}</span>
+                <Styled.SectionSubtotal>
+                  <span>{item.price}</span>
+                  <AiTwotoneDelete
+                    size={25}
+                    fill="#7160C3"
+                    onClick={() => deleteItem(item.id)}
+                  />
+                </Styled.SectionSubtotal>
               </Styled.TableData>
             </Styled.TableRow>
           ))}
         </Styled.TableBody>
+
+        <Styled.TableFooter>
+          <Styled.TableRow>
+            <Styled.TableData>
+              <Styled.Button>Finalizar Pedido</Styled.Button>
+            </Styled.TableData>
+            <Styled.TableData />
+            <Styled.TableData />
+            <Styled.TableData>
+              <span>TOTAL </span>
+              {totalPriceOfList}
+            </Styled.TableData>
+          </Styled.TableRow>
+        </Styled.TableFooter>
       </Styled.Table>
     </Styled.Container>
   );
