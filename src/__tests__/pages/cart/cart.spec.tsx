@@ -5,7 +5,7 @@ import Cart from '@pages/cart';
 import { searchItemById } from '@utils/searchItemById';
 
 import { renderTheme } from '@styles/render-theme';
-import { screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { useCartContext } from '@contexts/shoppingCart/cart';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '@styles/theme';
@@ -71,10 +71,14 @@ const useStateMock = useState as jest.Mock;
 const useCartContextMock = useCartContext as jest.Mock;
 const searchItemByIdMock = searchItemById as jest.Mock;
 
-describe('Cart Page', () => {
+describe('<Cart /> | Test E2E', () => {
   const getItemSpy = jest.spyOn(Storage.prototype, 'getItem');
   const setItemsDataMock = jest.fn().mockName('setItemsData');
   const setItemsByIdMock = jest.fn().mockName('setItemsById');
+
+  const addItemMock = jest.fn().mockName('addItem');
+  const removeItemMock = jest.fn().mockName('removeItem');
+  const deleteItemMock = jest.fn().mockName('deleteItem');
 
   beforeEach(() => {
     getItemSpy.mockReturnValue(
@@ -94,6 +98,9 @@ describe('Cart Page', () => {
         { id: 'ca19c56-86c2-40f2-b2ff-91d82d337600', quantity: 1 },
         { id: 'ca13-8c2-40f2-b2ff-91d837600', quantity: 3 },
       ],
+      addItem: addItemMock,
+      removeItem: removeItemMock,
+      deleteItem: deleteItemMock,
     });
 
     searchItemByIdMock.mockResolvedValueOnce({
@@ -129,7 +136,7 @@ describe('Cart Page', () => {
     });
   });
 
-  it('ensures that all cart items is render correctly', async () => {
+  it('ensures that cart page execute the functions correct and render correctly', async () => {
     const { rerender } = renderTheme(<Cart />);
 
     expect(useEffectMock).toHaveBeenCalled();
@@ -189,5 +196,85 @@ describe('Cart Page', () => {
 
     expect(itemsTable).toBeInTheDocument();
     expect(imagesOfTheItemsTable.length).toBe(2);
+
+    const [RemoveQuantityItemIcon, AddQuantityItemIcon, DeleteItemIcon] =
+      await screen.findAllByText((_, element) => {
+        return element.hasAttribute('name');
+      });
+
+    fireEvent.click(RemoveQuantityItemIcon);
+
+    expect(removeItemMock).toHaveBeenCalledWith('ca13-8c2-40f2-b2ff-91d837600');
+
+    useCartContextMock.mockReturnValueOnce({
+      items: [
+        { id: 'ca19c56-86c2-40f2-b2ff-91d82d337600', quantity: 1 },
+        { id: 'ca13-8c2-40f2-b2ff-91d837600', quantity: 2 },
+      ],
+      addItem: addItemMock,
+      removeItem: removeItemMock,
+      deleteItem: deleteItemMock,
+    });
+
+    useStateMock
+      .mockReturnValue([[], jest.fn()])
+      .mockReturnValueOnce([[], setItemsDataMock])
+      .mockReturnValueOnce([
+        [
+          {
+            id: 'ca13-8c2-40f2-b2ff-91d837600',
+            brand: 'Adidas',
+            title: 'Tênis VR Caminhada Confortável Detalhes Couro Masculino.',
+            description:
+              'Tênis VR Caminhada Confortável Detalhes Couro Masculino, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.',
+            image:
+              'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg',
+            size: 35,
+            color: 'green',
+            stockQuantityQuantity: 9,
+            price: 139.9,
+          },
+          {
+            id: 'ca19c56-86c2-40f2-b2ff-91d82d337600',
+            brand: 'Vans',
+            title: 'Tênis VR Caminhada Confortável Detalhes Couro Masculino.',
+            description:
+              'Tênis VR Caminhada Confortável Detalhes Couro Masculino, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.',
+            image:
+              'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg',
+            size: 29,
+            color: 'blue',
+            stockQuantityQuantity: 9,
+            price: 139.9,
+          },
+        ],
+        setItemsByIdMock,
+      ]);
+
+    rerender(
+      <ThemeProvider theme={theme}>
+        <Cart />
+      </ThemeProvider>
+    );
+
+    const [firstItem, secoundItem] = await screen.findAllByText(
+      (container, element) => {
+        return (
+          element.tagName.toLowerCase() === 'span' &&
+          element.className === 'quantityItem'
+        );
+      }
+    );
+
+    expect(firstItem).toHaveTextContent('1');
+    expect(secoundItem).toHaveTextContent('2');
+
+    // fireEvent.click(AddQuantityItemIcon);
+
+    // expect(addItemMock).toHaveBeenCalled();
+
+    // fireEvent.click(DeleteItemIcon);
+
+    // expect(deleteItemMock).toHaveBeenCalled();
   });
 });
