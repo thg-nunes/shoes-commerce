@@ -27,7 +27,7 @@ export function ExpositionItem({
   }, [items]);
 
   function getItemQuantityInList(): number {
-    const itemOfList = itemsSaved.find((item) => item.id === id);
+    const itemOfList = itemsSaved?.find((item) => item.id === id);
 
     return itemOfList?.quantity;
   }
