@@ -25,6 +25,26 @@ describe('<ItemsExposition />', () => {
       price: 110,
     },
   ];
+
+  beforeEach(() => {
+    jest.spyOn(Storage.prototype, 'getItem').mockReturnValue(
+      JSON.stringify([
+        {
+          id: '1',
+          quantity: 3,
+        },
+        {
+          id: '2',
+          quantity: 2,
+        },
+        {
+          id: '3',
+          quantity: 1,
+        },
+      ])
+    );
+  });
+
   it('ensures that items exposition render correctly item quantity', () => {
     renderTheme(<ItemsExposition itemsList={itemsList} />);
 
