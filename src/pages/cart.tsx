@@ -93,11 +93,15 @@ export default function Cart(): JSX.Element {
                   <AiOutlineMinusCircle
                     size={25}
                     fill="#7160C3"
+                    name="remove-quantity-item"
                     onClick={() => removeItem(item.id)}
                   />
-                  <span>{items[index]?.quantity || 0}</span>
+                  <span className="quantityItem">
+                    {items[index]?.quantity || 0}
+                  </span>
                   <AiOutlinePlusCircle
                     size={25}
+                    name="add-quantity-item"
                     fill="#7160C3"
                     onClick={() => addItem(item.id)}
                   />
@@ -108,6 +112,7 @@ export default function Cart(): JSX.Element {
                   <span>{item.price}</span>
                   <AiTwotoneDelete
                     size={25}
+                    name="delete-item"
                     fill="#7160C3"
                     onClick={() => deleteItem(item.id)}
                   />
