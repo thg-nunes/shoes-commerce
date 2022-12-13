@@ -39,7 +39,6 @@ export function ItemsExposition({
         currency: 'BRL',
       }).format(Number(item.price)),
     }));
-
     setItemsOfThePage(itemsToExpositionUpdatePrice);
   }, [currentPage, itemsList]);
 
