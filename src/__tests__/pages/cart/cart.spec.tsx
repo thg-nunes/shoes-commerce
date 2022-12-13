@@ -71,7 +71,7 @@ const useStateMock = useState as jest.Mock;
 const useCartContextMock = useCartContext as jest.Mock;
 const searchItemByIdMock = searchItemById as jest.Mock;
 
-describe('<Cart /> | Test E2E', () => {
+describe('<Cart /> | Test E2E of cart page', () => {
   const getItemSpy = jest.spyOn(Storage.prototype, 'getItem');
   const setItemsDataMock = jest.fn().mockName('setItemsData');
   const setItemsByIdMock = jest.fn().mockName('setItemsById');
@@ -206,6 +206,13 @@ describe('<Cart /> | Test E2E', () => {
 
     expect(removeItemMock).toHaveBeenCalledWith('ca13-8c2-40f2-b2ff-91d837600');
 
+    getItemSpy.mockReturnValue(
+      JSON.stringify([
+        { id: 'ca19c56-86c2-40f2-b2ff-91d82d337600', quantity: 1 },
+        { id: 'ca13-8c2-40f2-b2ff-91d837600', quantity: 2 },
+      ])
+    );
+
     useCartContextMock.mockReturnValueOnce({
       items: [
         { id: 'ca19c56-86c2-40f2-b2ff-91d82d337600', quantity: 1 },
@@ -269,12 +276,151 @@ describe('<Cart /> | Test E2E', () => {
     expect(firstItem).toHaveTextContent('1');
     expect(secoundItem).toHaveTextContent('2');
 
-    // fireEvent.click(AddQuantityItemIcon);
+    fireEvent.click(AddQuantityItemIcon);
 
-    // expect(addItemMock).toHaveBeenCalled();
+    expect(addItemMock).toHaveBeenCalledWith('ca13-8c2-40f2-b2ff-91d837600');
 
-    // fireEvent.click(DeleteItemIcon);
+    getItemSpy.mockReturnValue(
+      JSON.stringify([
+        { id: 'ca19c56-86c2-40f2-b2ff-91d82d337600', quantity: 1 },
+        { id: 'ca13-8c2-40f2-b2ff-91d837600', quantity: 3 },
+      ])
+    );
 
-    // expect(deleteItemMock).toHaveBeenCalled();
+    useCartContextMock.mockReturnValueOnce({
+      items: [
+        { id: 'ca19c56-86c2-40f2-b2ff-91d82d337600', quantity: 1 },
+        { id: 'ca13-8c2-40f2-b2ff-91d837600', quantity: 3 },
+      ],
+      addItem: addItemMock,
+      removeItem: removeItemMock,
+      deleteItem: deleteItemMock,
+    });
+
+    useStateMock
+      .mockReturnValue([[], jest.fn()])
+      .mockReturnValueOnce([[], setItemsDataMock])
+      .mockReturnValueOnce([
+        [
+          {
+            id: 'ca13-8c2-40f2-b2ff-91d837600',
+            brand: 'Adidas',
+            title: 'Tênis VR Caminhada Confortável Detalhes Couro Masculino.',
+            description:
+              'Tênis VR Caminhada Confortável Detalhes Couro Masculino, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.',
+            image:
+              'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg',
+            size: 35,
+            color: 'green',
+            stockQuantityQuantity: 9,
+            price: 139.9,
+          },
+          {
+            id: 'ca19c56-86c2-40f2-b2ff-91d82d337600',
+            brand: 'Vans',
+            title: 'Tênis VR Caminhada Confortável Detalhes Couro Masculino.',
+            description:
+              'Tênis VR Caminhada Confortável Detalhes Couro Masculino, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.',
+            image:
+              'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg',
+            size: 29,
+            color: 'blue',
+            stockQuantityQuantity: 9,
+            price: 139.9,
+          },
+        ],
+        setItemsByIdMock,
+      ]);
+
+    rerender(
+      <ThemeProvider theme={theme}>
+        <Cart />
+      </ThemeProvider>
+    );
+
+    const [_firstSpanItemQuantity] = await screen.findAllByText(
+      (container, element) => {
+        return element.tagName.toLowerCase() === 'span';
+      }
+    );
+
+    expect(_firstSpanItemQuantity).toHaveTextContent('3');
+
+    fireEvent.click(DeleteItemIcon);
+
+    expect(deleteItemMock).toHaveBeenCalledWith('ca13-8c2-40f2-b2ff-91d837600');
+
+    getItemSpy.mockReturnValue(
+      JSON.stringify([
+        { id: 'ca19c56-86c2-40f2-b2ff-91d82d337600', quantity: 1 },
+      ])
+    );
+
+    useCartContextMock.mockReturnValueOnce({
+      items: [{ id: 'ca19c56-86c2-40f2-b2ff-91d82d337600', quantity: 1 }],
+      addItem: addItemMock,
+      removeItem: removeItemMock,
+      deleteItem: deleteItemMock,
+    });
+
+    useStateMock
+      .mockReturnValue([[], jest.fn()])
+      .mockReturnValueOnce([[], setItemsDataMock])
+      .mockReturnValueOnce([
+        [
+          {
+            id: 'ca19c56-86c2-40f2-b2ff-91d82d337600',
+            brand: 'Vans',
+            title: 'Tênis VR Caminhada Confortável Detalhes Couro Masculino.',
+            description:
+              'Tênis VR Caminhada Confortável Detalhes Couro Masculino, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.',
+            image:
+              'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg',
+            size: 29,
+            color: 'blue',
+            stockQuantityQuantity: 9,
+            price: 139.9,
+          },
+        ],
+        setItemsByIdMock,
+      ]);
+
+    rerender(
+      <ThemeProvider theme={theme}>
+        <Cart />
+      </ThemeProvider>
+    );
+
+    const itemsOfUserInteraction = await screen.findAllByText((_, element) => {
+      return element.hasAttribute('name');
+    });
+
+    fireEvent.click(itemsOfUserInteraction[2]);
+
+    expect(deleteItemMock).toHaveBeenCalledWith(
+      'ca19c56-86c2-40f2-b2ff-91d82d337600'
+    );
+
+    getItemSpy.mockReturnValue(JSON.stringify([]));
+
+    useCartContextMock.mockReturnValueOnce({
+      items: [],
+      addItem: addItemMock,
+      removeItem: removeItemMock,
+      deleteItem: deleteItemMock,
+    });
+
+    useStateMock
+      .mockReturnValue([[], jest.fn()])
+      .mockReturnValueOnce([[], setItemsDataMock])
+      .mockReturnValueOnce([[], setItemsByIdMock]);
+
+    rerender(
+      <ThemeProvider theme={theme}>
+        <Cart />
+      </ThemeProvider>
+    );
+
+    expect(screen.queryByRole('table')).not.toBeInTheDocument();
   });
 });
