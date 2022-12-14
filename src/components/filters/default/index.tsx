@@ -5,24 +5,26 @@ import { ItemsList } from '@templates/itemsExposiotion';
 import * as Styled from './styled';
 
 export type DefaultFilterProps = {
-  textFilter: string;
+  searchBy: string;
+  textContent?: string;
   filterOf: 'brand' | 'size' | 'color';
   setItems: Dispatch<SetStateAction<ItemsList>>;
 };
 
 export function DefaultFilter({
-  textFilter,
-  filterOf,
+  searchBy,
+  textContent,
+  filterOf = 'brand',
   setItems,
 }: DefaultFilterProps): JSX.Element {
   return (
     <Styled.Container
       onClick={async () => {
-        const response = await searchItem({ searchBy: textFilter, filterOf });
+        const response = await searchItem({ searchBy, filterOf });
         setItems(response.items);
       }}
     >
-      {textFilter}
+      {textContent}
     </Styled.Container>
   );
 }

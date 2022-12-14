@@ -5,17 +5,19 @@ import { DefaultFilterProps } from '../default';
 import * as Styled from './styled';
 
 export function ColorFilter({
-  textFilter,
-  filterOf,
+  searchBy,
+  textContent,
+  filterOf = 'color',
   setItems,
 }: DefaultFilterProps): JSX.Element {
   return (
     <Styled.ColorOption
-      color={textFilter}
       onClick={async () => {
-        const response = await searchItem({ searchBy: textFilter, filterOf });
+        const response = await searchItem({ searchBy, filterOf });
         setItems(response.items);
       }}
-    />
+    >
+      {textContent}
+    </Styled.ColorOption>
   );
 }
