@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.button`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
   padding-right: 1rem;
 
   color: white;
@@ -34,5 +34,14 @@ export const Container = styled.button`
   :hover {
     filter: brightness(0.9);
     transition: 250ms all ease-in-out;
+  }
+
+  @media (max-width: 1024px) {
+    gap: 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 540px) {
+    gap: 2rem;
   }
 `;

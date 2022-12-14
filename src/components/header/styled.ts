@@ -9,6 +9,10 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 1366px) {
+    width: 95%;
+  }
 `;
 
 export const Logo = styled.section`

@@ -23,7 +23,7 @@ export function ExpositionItem({
       <Styled.Details>
         <img src={src} alt="shoes" />
         <p>{title}</p>
-        <Styled.Price>R$ {price}</Styled.Price>
+        <Styled.Price>{price}</Styled.Price>
       </Styled.Details>
       <Button
         quantityItemInCart={() =>

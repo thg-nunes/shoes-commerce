@@ -21,11 +21,21 @@ export const Container = styled.div`
 
     text-align: center;
     width: 200px;
+
+    @media (max-width: 540px) {
+      width: 140px;
+    }
   }
 `;
 
 export const Details = styled.section`
   margin-bottom: ${({ theme }) => theme.spacings.small};
+
+  @media (max-width: 540px) {
+    p:nth-child(1) {
+      font-size: 0.85rem;
+    }
+  }
 `;
 
 export const Price = styled.p`
