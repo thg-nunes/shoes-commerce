@@ -33,10 +33,17 @@ describe('', () => {
     const setItems = jest.fn();
 
     renderTheme(
-      <SizeFilter filterOf="size" textFilter="35" setItems={setItems} />
+      <SizeFilter
+        filterOf="size"
+        textContent="35"
+        setItems={setItems}
+        searchBy="35"
+      />
     );
 
-    const optionColor = screen.getByRole('button');
+    const optionColor = screen.getByText((content, element) => {
+      return content.startsWith('35');
+    });
 
     expect(optionColor).toBeInTheDocument();
 

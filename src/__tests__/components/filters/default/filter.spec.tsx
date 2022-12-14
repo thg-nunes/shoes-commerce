@@ -34,7 +34,12 @@ describe('', () => {
     const setItems = jest.fn();
 
     renderTheme(
-      <DefaultFilter filterOf="brand" textFilter="Nike" setItems={setItems} />
+      <DefaultFilter
+        filterOf="brand"
+        searchBy="Nike"
+        textContent="Nike"
+        setItems={setItems}
+      />
     );
 
     const optionColor = screen.getByRole('listitem');

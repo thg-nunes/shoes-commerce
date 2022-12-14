@@ -33,10 +33,17 @@ describe('', () => {
     const setItems = jest.fn();
 
     renderTheme(
-      <ColorFilter filterOf="color" textFilter="red" setItems={setItems} />
+      <ColorFilter
+        filterOf="color"
+        searchBy="red"
+        textContent="Vermelho"
+        setItems={setItems}
+      />
     );
 
-    const optionColor = screen.getByRole('button');
+    const optionColor = screen.getByText((content, element) => {
+      return content.startsWith('Vermelho');
+    });
 
     expect(optionColor).toBeInTheDocument();
 

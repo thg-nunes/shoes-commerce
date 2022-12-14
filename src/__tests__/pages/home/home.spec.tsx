@@ -6,7 +6,7 @@ import { api } from '@services/axios';
 
 import { useCartContext } from '@contexts/shoppingCart/cart';
 
-import Home from '@pages/index';
+import Home from '@pages/home';
 import { theme } from '@styles/theme';
 import { renderTheme } from '@styles/render-theme';
 import { ThemeProvider } from 'styled-components';
@@ -68,7 +68,7 @@ describe('<Home /> | Test E2E of home page', () => {
   const addItemMock = jest.fn().mockName('addItem');
 
   beforeEach(() => {
-    apiMock.onGet(`/api/items/all`).reply(200, {
+    apiMock.onGet(`/c-shoes/api/items/all`).reply(200, {
       status: 'success',
       items: {
         data: responseApi,
