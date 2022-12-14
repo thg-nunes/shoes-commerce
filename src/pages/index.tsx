@@ -4,9 +4,10 @@ import { api } from '@services/axios';
 import { ItemsExposition, ItemsList } from '@templates/itemsExposiotion';
 import { DefaultFilter } from '@components/filters/default';
 
-import * as Styled from '@styles/pages/homePage/styled';
 import { SizeFilter } from '@components/filters/size';
 import { ColorFilter } from '@components/filters/color';
+
+import * as Styled from '@styles/pages/homePage/styled';
 
 export default function Home(): JSX.Element {
   const [items, setItems] = useState<ItemsList>([]);
@@ -24,113 +25,131 @@ export default function Home(): JSX.Element {
     items.length && (
       <Styled.Container>
         <Styled.FilterSection>
-          <span>Filtros</span>
+          <span>Filtros |</span>
 
           <div>
             <Styled.BrandFilters>
-              <p>- Marca</p>
+              <p>Marca</p>
               <ul>
                 <DefaultFilter
                   setItems={setItems}
                   filterOf="brand"
-                  textFilter="Nike"
+                  searchBy="Nike"
+                  textContent="Nike"
                 />
                 <DefaultFilter
                   setItems={setItems}
                   filterOf="brand"
-                  textFilter="Adidas"
+                  searchBy="Adidas"
+                  textContent="Adidas"
                 />
                 <DefaultFilter
                   setItems={setItems}
                   filterOf="brand"
-                  textFilter="Vans"
+                  searchBy="Vans"
+                  textContent="Vans"
                 />
               </ul>
             </Styled.BrandFilters>
 
             <Styled.SizeFilters>
-              <p>- Tamanho</p>
+              <p>Tamanho</p>
               <ul>
                 <SizeFilter
                   filterOf="size"
                   setItems={setItems}
-                  textFilter="26"
+                  searchBy="26"
+                  textContent="26"
                 />
                 <SizeFilter
                   filterOf="size"
                   setItems={setItems}
-                  textFilter="28"
+                  searchBy="28"
+                  textContent="28"
                 />
                 <SizeFilter
                   filterOf="size"
                   setItems={setItems}
-                  textFilter="30"
+                  searchBy="30"
+                  textContent="30"
                 />
                 <SizeFilter
                   filterOf="size"
                   setItems={setItems}
-                  textFilter="32"
+                  searchBy="32"
+                  textContent="32"
                 />
                 <SizeFilter
                   filterOf="size"
                   setItems={setItems}
-                  textFilter="34"
+                  searchBy="34"
+                  textContent="34"
                 />
                 <SizeFilter
                   filterOf="size"
                   setItems={setItems}
-                  textFilter="36"
+                  searchBy="36"
+                  textContent="36"
                 />
                 <SizeFilter
                   filterOf="size"
                   setItems={setItems}
-                  textFilter="38"
+                  searchBy="38"
+                  textContent="38"
                 />
                 <SizeFilter
                   filterOf="size"
                   setItems={setItems}
-                  textFilter="40"
+                  searchBy="40"
+                  textContent="40"
                 />
               </ul>
             </Styled.SizeFilters>
 
             <Styled.ColorFilters>
-              <p>- Cor</p>
+              <p>Cor</p>
               <ul>
                 <ColorFilter
                   filterOf="color"
                   setItems={setItems}
-                  textFilter="red"
+                  searchBy="red"
+                  textContent="Vermelho"
                 />
                 <ColorFilter
                   filterOf="color"
                   setItems={setItems}
-                  textFilter="green"
+                  searchBy="green"
+                  textContent="Verde"
                 />
                 <ColorFilter
                   filterOf="color"
                   setItems={setItems}
-                  textFilter="blue"
+                  searchBy="blue"
+                  textContent="Azul"
                 />
                 <ColorFilter
                   filterOf="color"
                   setItems={setItems}
-                  textFilter="white"
+                  searchBy="white"
+                  textContent="Branco"
                 />
                 <ColorFilter
                   filterOf="color"
                   setItems={setItems}
-                  textFilter="black"
+                  searchBy="black"
+                  textContent="Preto"
                 />
                 <ColorFilter
                   filterOf="color"
                   setItems={setItems}
-                  textFilter="yellow"
+                  searchBy="yellow"
+                  textContent="Amarelo"
                 />
                 <ColorFilter
                   filterOf="color"
                   setItems={setItems}
-                  textFilter="perple"
+                  searchBy="perple"
+                  textContent="Roxo"
                 />
               </ul>
             </Styled.ColorFilters>
