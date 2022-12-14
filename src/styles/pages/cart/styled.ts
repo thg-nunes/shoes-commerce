@@ -12,6 +12,10 @@ export const Container = styled.main<MainProps>`
   margin: 0 auto;
 
   background: ${({ theme }) => theme.colors.white[100]};
+
+  @media (max-width: 1366px) {
+    width: 95%;
+  }
 `;
 
 export const Table = styled.table`
@@ -22,6 +26,14 @@ export const Table = styled.table`
 
 export const TableHead = styled.thead`
   color: ${({ theme }) => theme.colors.gray[250]};
+
+  @media (max-width: 540px) {
+    tr {
+      th:first-child {
+        display: none;
+      }
+    }
+  }
 `;
 
 export const TableBody = styled.tbody`
@@ -31,11 +43,41 @@ export const TableBody = styled.tbody`
   img {
     max-width: 150px;
   }
+
+  @media (max-width: 768px) {
+    img {
+      max-width: 100px;
+    }
+  }
+
+  @media (max-width: 540px) {
+    tr {
+      td:first-child {
+        display: none;
+      }
+
+      td:nth-child(2) {
+        span {
+          display: none;
+        }
+      }
+    }
+  }
 `;
 
 export const TableRow = styled.tr`
   th {
     text-align: start;
+  }
+
+  @media (max-width: 768px) {
+    td:nth-child(2) {
+      font-size: 0.9rem;
+    }
+
+    td:last-child {
+      font-size: 1.3rem;
+    }
   }
 `;
 
@@ -57,6 +99,20 @@ export const TableFooter = styled.tfoot`
     span {
       font-size: 1.1rem;
       color: ${({ theme }) => theme.colors.gray[250]};
+    }
+  }
+
+  @media (max-width: 768px) {
+    td:last-child {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 540px) {
+    tr {
+      td:nth-child(3) {
+        display: none;
+      }
     }
   }
 `;
@@ -91,6 +147,10 @@ export const SectionUpdateProductQuantity = styled.section`
 
   svg {
     cursor: pointer;
+
+    @media (max-width: 768px) {
+      width: 20px;
+    }
   }
 `;
 
