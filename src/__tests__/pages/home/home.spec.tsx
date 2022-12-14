@@ -68,7 +68,7 @@ describe('<Home /> | Test E2E of home page', () => {
   const addItemMock = jest.fn().mockName('addItem');
 
   beforeEach(() => {
-    apiMock.onGet(`/c-shoes/api/items/all`).reply(200, {
+    apiMock.onGet(`/api/items/all`).reply(200, {
       status: 'success',
       items: {
         data: responseApi,
