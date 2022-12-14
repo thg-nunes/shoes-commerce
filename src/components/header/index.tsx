@@ -10,10 +10,14 @@ export function Header(): JSX.Element {
 
   return (
     <Styled.Container>
-      <Styled.Logo>
-        <h3>COMMERCE-SHOES</h3>
-        <GiSonicShoes size={35} name="shoes-icon" />
-      </Styled.Logo>
+      <Link href="/" passHref>
+        <a>
+          <Styled.Logo>
+            <h3>COMMERCE-SHOES</h3>
+            <GiSonicShoes size={35} name="shoes-icon" />
+          </Styled.Logo>
+        </a>
+      </Link>
       <Link href="/cart" passHref>
         <a>
           <Styled.ShoppingCart>
