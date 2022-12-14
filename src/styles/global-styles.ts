@@ -41,6 +41,11 @@ const GlobalStyles = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+
+  .Toastify__toast {
+    color: ${({ theme }) => theme.colors.white[100]};
+    background-color: ${({ theme }) => theme.colors.gray[700]};
+  }
 `;
 
 export { GlobalStyles };

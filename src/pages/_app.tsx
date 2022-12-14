@@ -1,6 +1,9 @@
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Header } from '@components/header';
 import { theme } from '@styles/theme';
 import { GlobalStyles } from '@styles/global-styles';
@@ -14,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <Component {...pageProps} />
       </CartProvider>
       <GlobalStyles />
+      <ToastContainer />
     </ThemeProvider>
   );
 }
