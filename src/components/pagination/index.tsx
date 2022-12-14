@@ -14,7 +14,7 @@ export function Pagination({
 }: PaginationProps): JSX.Element {
   const createPages = (): number[] => {
     const pages: number[] = [];
-    for (let i = 1; i <= Math.ceil(totalPage); i++) {
+    for (let i = 1; i <= totalPage; i++) {
       pages.push(i);
     }
 

@@ -28,8 +28,10 @@ export function ItemsExposition({
   const [itemsPerPage] = useState(12);
 
   useEffect(() => {
-    const init_slice = currentPage === 1 ? 0 : itemsPerPage;
-    const end_slice = currentPage === 1 ? itemsPerPage : itemsPerPage * 2;
+    const init_slice =
+      currentPage === 1 ? 0 : itemsPerPage * currentPage - itemsPerPage;
+    const end_slice =
+      currentPage === 1 ? itemsPerPage : itemsPerPage * currentPage;
 
     const itemsToExposition = itemsList.slice(init_slice, end_slice);
     const itemsToExpositionUpdatePrice = itemsToExposition.map((item) => ({
@@ -58,7 +60,7 @@ export function ItemsExposition({
       </section>
       <Pagination
         pageActive={currentPage}
-        totalPage={itemsList.length / 12}
+        totalPage={Math.ceil(itemsList.length / 12)}
         setPage={setCurrentPage}
       />
     </Styled.Container>
