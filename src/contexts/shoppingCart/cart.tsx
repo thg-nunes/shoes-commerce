@@ -53,7 +53,7 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
     const requisitionItem = data.items[0];
 
     if (requisitionItem.stockQuantity <= 0) {
-      toast.error('Quantidade em estoque insuficiente', {
+      toast.warn('Quantidade em estoque insuficiente', {
         autoClose: 3000,
       });
 
@@ -85,29 +85,29 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
       return;
     }
 
-    const productQuantityUpdate = items.filter((item) => {
-      if (item.id === id) {
-        item.quantity += 1;
-      }
-
-      return item;
-    });
-
     if (
       produtAlreadyExists &&
-      produtAlreadyExists.quantity > requisitionItem.stockQuantity
+      produtAlreadyExists.quantity >= requisitionItem.stockQuantity
     ) {
       toast.error('Quantidade no carrinho maior que estoque nosso estoque', {
         autoClose: 3000,
       });
+    } else {
+      const productQuantityUpdate = items.filter((item) => {
+        if (item.id === id) {
+          item.quantity += 1;
+        }
+
+        return item;
+      });
+
+      setItems([...productQuantityUpdate]);
+
+      localStorage.setItem(
+        'user@listItems',
+        JSON.stringify(productQuantityUpdate)
+      );
     }
-
-    setItems([...productQuantityUpdate]);
-
-    localStorage.setItem(
-      'user@listItems',
-      JSON.stringify(productQuantityUpdate)
-    );
   }
 
   function removeItem(id: string): void {
@@ -150,7 +150,7 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
 
     setItems([...itemDeleted]);
 
-    toast.warn('Item deleta do carrinho', {
+    toast.warn('Item deletado do carrinho', {
       autoClose: 3000,
     });
 

@@ -171,7 +171,7 @@ describe('contexts/shoppingCart', () => {
 
     await act(() => result.current.addItem('1'));
 
-    expect(toastError).toHaveBeenCalledWith(toastMessage, toastCloseIn);
+    expect(toastWarn).toHaveBeenCalledWith(toastMessage, toastCloseIn);
     expect(result.current.items.length).toBe(0);
   });
 
@@ -201,7 +201,7 @@ describe('contexts/shoppingCart', () => {
       expect.arrayContaining([
         {
           id: '1',
-          quantity: 16,
+          quantity: 15,
         },
       ])
     );
@@ -279,7 +279,7 @@ describe('contexts/shoppingCart', () => {
       { id: '3', quantity: 2 },
     ]);
 
-    expect(toastWarn).toHaveBeenCalledWith('Item deleta do carrinho', {
+    expect(toastWarn).toHaveBeenCalledWith('Item deletado do carrinho', {
       autoClose: 3000,
     });
 
