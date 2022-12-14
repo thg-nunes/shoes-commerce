@@ -5,17 +5,24 @@ export const Container = styled.main`
   margin: 0 auto;
   margin-bottom: 2rem;
 
+  display: grid;
+  grid-gap: 1rem;
+
   @media (max-width: 1366px) {
     width: 95%;
   }
 `;
 
 export const FilterSection = styled.section`
-  width: 15%;
-  padding: 0 0.5rem;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+
+  background: ${({ theme }) => theme.colors.pink[700]};
+  z-index: 1;
 
   span {
-    width: 100%;
+    width: max-content;
     display: inline-block;
 
     font-size: 1.3rem;
@@ -25,51 +32,57 @@ export const FilterSection = styled.section`
 
   > div {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
   }
 `;
 
 export const BrandFilters = styled.section`
+  width: 7rem;
+  position: relative;
+
   p {
     font-weight: 600;
-  }
-
-  li {
-    list-style: none;
     line-height: 2rem;
+    text-align: center;
     cursor: pointer;
-    padding-left: 0.9rem;
     transition: all 250ms ease-in-out;
 
     :hover {
-      background: ${({ theme }) => theme.colors.gray[400]};
+      background: ${({ theme }) => theme.colors.pink[400]};
+    }
+  }
+
+  ul {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-rows: 1fr;
+    background: ${({ theme }) => theme.colors.pink[700]};
+    z-index: 1;
+
+    li {
+      height: 2rem;
+      line-height: 2rem;
+
+      list-style: none;
+      text-align: center;
+      cursor: pointer;
+
+      :hover {
+        background: ${({ theme }) => theme.colors.pink[400]};
+      }
+    }
+  }
+
+  :hover {
+    ul {
+      height: auto;
     }
   }
 `;
 
-export const SizeFilters = styled(BrandFilters)`
-  li {
-    padding-left: 0;
-    font-size: 0.75rem;
-  }
+export const SizeFilters = styled(BrandFilters)``;
 
-  ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-`;
-
-export const ColorFilters = styled(BrandFilters)`
-  ul {
-    padding: 0.2rem;
-    padding-left: 0.9rem;
-
-    display: grid;
-    grid-gap: 0.5rem 0;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    border-radius: 2px;
-
-    background: ${({ theme }) => theme.colors.gray[400]};
-  }
-`;
+export const ColorFilters = styled(BrandFilters)``;
