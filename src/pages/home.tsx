@@ -14,7 +14,7 @@ export default function Home(): JSX.Element {
 
   useEffect(() => {
     const getItems = async (): Promise<void> => {
-      const { data } = await api.get('/c-shoes/api/items/all');
+      const { data } = await api.get('/api/items/all');
       setItems(data.items.data);
     };
 
