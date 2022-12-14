@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
 export const Container = styled.main`
-  display: flex;
-  gap: 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+
+  @media (max-width: 1366px) {
+    width: 95%;
+  }
 `;
 
 export const FilterSection = styled.section`
