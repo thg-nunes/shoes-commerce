@@ -42,7 +42,7 @@ export default function Cart(): JSX.Element {
 
     const userItemsList = localStorage.getItem('user@listItems');
     const userItemsListJson: StorageItems = JSON.parse(userItemsList);
-    userItemsListJson.forEach((item) => productsId.push(item.id));
+    userItemsListJson?.forEach((item) => productsId.push(item.id));
 
     const getItemsById = async (): Promise<void> => {
       const response = await searchItemById({ id: productsId });
@@ -63,7 +63,7 @@ export default function Cart(): JSX.Element {
       setItemsById(formatePrice);
     };
 
-    if (userItemsListJson.length) getItemsById();
+    if (userItemsListJson?.length) getItemsById();
   }, [items]);
 
   return (
