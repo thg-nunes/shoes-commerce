@@ -191,18 +191,6 @@
       "price": 199.90
     },
     {
-      "id": "4",
-      "brand": "Adidas",
-      "title": "Tênis Adidas Coreracer Feminino - Preto",
-      "description": "Com um cabedal confeccionado com material têxtil, a parte de cima do calçado conta também com tramas em mesh que garantem circulação de ar e ótima respirabilidade entre uma passada e outra.",
-      "image": "https://static.netshoes.com.br/produtos/tenis-adidas-coreracer-feminino/93/NQQ-4636-793/NQQ-4636-793_zoom1.jpg?ts=1665494106&ims=544x",
-      "size": [39],
-      "color": "black",
-      "indicado_para": ["Caminhada", "Corrida"],
-      "stockQuantity": 24,
-      "price": 199.90
-    },
-    {
       "id": "17",
       "brand": "Mizuno",
       "title": "Tênis Mizuno Space 2 Masculino - Preto",
@@ -345,6 +333,18 @@
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 1,
       "price": 169.90
+    },
+    {
+      "id": "29",
+      "brand": "Adidas",
+      "title": "Tênis Adidas Coreracer Feminino - Preto",
+      "description": "Com um cabedal confeccionado com material têxtil, a parte de cima do calçado conta também com tramas em mesh que garantem circulação de ar e ótima respirabilidade entre uma passada e outra.",
+      "image": "https://static.netshoes.com.br/produtos/tenis-adidas-coreracer-feminino/93/NQQ-4636-793/NQQ-4636-793_zoom1.jpg?ts=1665494106&ims=544x",
+      "size": [39],
+      "color": "black",
+      "indicado_para": ["Caminhada", "Corrida"],
+      "stockQuantity": 24,
+      "price": 199.90
     }
   ]
 }

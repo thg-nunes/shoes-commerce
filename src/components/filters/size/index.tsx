@@ -1,4 +1,5 @@
 import { searchItem } from '@utils/searchItem';
+import { timeToDisplayItems } from '@utils/setTimeToDisplayItems';
 
 import { DefaultFilterProps } from '../default';
 
@@ -8,6 +9,8 @@ export function SizeFilter({
   textContent,
   searchBy,
   filterOf = 'size',
+  _timeToDisplayItems = false,
+  setTimeToDisplayItems,
   setItems,
 }: DefaultFilterProps): JSX.Element {
   return (
@@ -15,6 +18,10 @@ export function SizeFilter({
       onClick={async () => {
         const response = await searchItem({ searchBy, filterOf });
         setItems(response.items);
+        timeToDisplayItems({
+          _timeToDisplayItems,
+          setTimeToDisplay: setTimeToDisplayItems,
+        });
       }}
     >
       {textContent}
