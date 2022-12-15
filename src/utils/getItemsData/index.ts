@@ -48,7 +48,7 @@ const searchItem = async ({
   filterOf,
 }: SearchItemProps): Promise<Response> => {
   const { data } = await api.get<Response>(
-    `/api/search/${filterOf}/${searchBy}`
+    `/api/search/fild/${filterOf}/${searchBy}`
   );
 
   return data;
