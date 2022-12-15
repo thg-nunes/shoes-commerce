@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import Cart from '@pages/cart';
 
-import { searchItemById } from '@utils/getItemsDataById';
+import {
+  searchItemById,
+  useReturnTotalPriceOfItems,
+} from '@utils/getItemsData';
 
 import { renderTheme } from '@styles/render-theme';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
@@ -20,7 +23,7 @@ jest.mock('react', () => {
     useState: jest.fn(),
   };
 });
-jest.mock('@utils/getItemsDataById', () => {
+jest.mock('@utils/getItemsData', () => {
   return {
     searchItemById: jest.fn().mockResolvedValue({
       status: 'success',
@@ -53,6 +56,7 @@ jest.mock('@utils/getItemsDataById', () => {
         },
       ],
     }),
+    useReturnTotalPriceOfItems: jest.fn(),
   };
 });
 jest.mock('@contexts/shoppingCart/cart', () => {
@@ -70,6 +74,7 @@ const useEffectMock = useEffect as jest.Mock;
 const useStateMock = useState as jest.Mock;
 const useCartContextMock = useCartContext as jest.Mock;
 const searchItemByIdMock = searchItemById as jest.Mock;
+const useReturnTotalPriceOfItemsMock = useReturnTotalPriceOfItems as jest.Mock;
 
 describe('<Cart /> | Test E2E of cart page', () => {
   const getItemSpy = jest.spyOn(Storage.prototype, 'getItem');
@@ -102,6 +107,8 @@ describe('<Cart /> | Test E2E of cart page', () => {
       removeItem: removeItemMock,
       deleteItem: deleteItemMock,
     });
+
+    useReturnTotalPriceOfItemsMock.mockReturnValue('R$ 123,03');
 
     searchItemByIdMock.mockResolvedValueOnce({
       status: 'success',

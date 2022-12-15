@@ -24,6 +24,10 @@ jest.mock('@utils/getItemsData', () => {
         },
       ],
     }),
+    searchItemById: jest.fn(),
+    timeToDisplayItems: jest.fn(),
+    getItemQuantityInList: jest.fn(),
+    useReturnTotalPriceOfItems: jest.fn(),
   };
 });
 
