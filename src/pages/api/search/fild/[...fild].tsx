@@ -7,9 +7,12 @@ export default function returnItemsByBrand(
   res: NextApiResponse
 ): void {
   if (req.method === 'GET') {
-    const { brand } = req.query;
+    const { fild } = req.query;
+    const [fildSelected, value] = fild;
 
-    const responseByBrand = items.data.filter((item) => item.brand === brand);
+    const responseByBrand = items.data.filter(
+      (item) => item[fildSelected] === value
+    );
 
     return res.json({
       status: 'success',
