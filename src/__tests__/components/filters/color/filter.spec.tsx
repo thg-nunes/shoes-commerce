@@ -1,11 +1,11 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 
-import { searchItem } from '@utils/searchItem';
+import { searchItem } from '@utils/getItemsData';
 import { ColorFilter } from '@components/filters/color';
 
 import { renderTheme } from '@styles/render-theme';
 
-jest.mock('@utils/searchItem', () => {
+jest.mock('@utils/getItemsData', () => {
   return {
     searchItem: jest.fn().mockResolvedValue({
       status: 'success',

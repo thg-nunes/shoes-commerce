@@ -1,6 +1,6 @@
 import { Button } from '@components/button/addItem';
 import { useCartContext } from '@contexts/shoppingCart/cart';
-import { getItemQuantityInList } from '@utils/getItemQuantityList';
+import { getItemQuantityInList } from '@utils/getItemsData';
 import * as Styled from './styled';
 
 export type ItemProps = {

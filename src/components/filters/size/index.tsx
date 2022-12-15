@@ -1,5 +1,5 @@
-import { searchItem } from '@utils/searchItem';
-import { timeToDisplayItems } from '@utils/setTimeToDisplayItems';
+import { searchItem } from '@utils/getItemsData';
+import { timeToDisplayItems } from '@utils/getItemsData';
 
 import { DefaultFilterProps } from '../default';
 

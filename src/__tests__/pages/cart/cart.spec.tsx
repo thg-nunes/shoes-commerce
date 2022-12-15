@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Cart from '@pages/cart';
 
-import { searchItemById } from '@utils/searchItemById';
+import { searchItemById } from '@utils/getItemsDataById';
 
 import { renderTheme } from '@styles/render-theme';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
@@ -20,7 +20,7 @@ jest.mock('react', () => {
     useState: jest.fn(),
   };
 });
-jest.mock('@utils/searchItemById', () => {
+jest.mock('@utils/getItemsDataById', () => {
   return {
     searchItemById: jest.fn().mockResolvedValue({
       status: 'success',

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { searchItem } from '@utils/searchItem';
-import { timeToDisplayItems } from '@utils/setTimeToDisplayItems';
+import { searchItem } from '@utils/getItemsData';
+import { timeToDisplayItems } from '@utils/getItemsData';
 import { ItemsList } from '@templates/itemsExposiotion';
 import * as Styled from './styled';
 

@@ -7,8 +7,8 @@ import {
 
 import { ItemsList } from '@templates/itemsExposiotion';
 
-import { searchItemById } from '@utils/searchItemById';
-import { useReturnTotalPriceOfItems } from '@utils/totalPriceOfItems';
+import { searchItemById } from '@utils/getItemsData';
+import { useReturnTotalPriceOfItems } from '@utils/getItemsData';
 import { useCartContext } from '@contexts/shoppingCart/cart';
 
 import * as Styled from '@styles/pages/cart/styled';
