@@ -34,6 +34,8 @@ describe('', () => {
 
     renderTheme(
       <SizeFilter
+        _timeToDisplayItems={false}
+        setTimeToDisplayItems={jest.fn()}
         filterOf="size"
         textContent="35"
         setItems={setItems}

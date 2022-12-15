@@ -75,7 +75,9 @@ describe('<Home /> | Test E2E of home page', () => {
       },
     });
 
-    useStateMock.mockReturnValueOnce([[], setItemsMock]);
+    useStateMock
+      .mockReturnValueOnce([[], setItemsMock])
+      .mockReturnValueOnce([false, setItemsMock]);
 
     useCartContextMock.mockReturnValueOnce({
       addItem: addItemMock,

@@ -34,6 +34,8 @@ describe('', () => {
 
     renderTheme(
       <ColorFilter
+        _timeToDisplayItems={false}
+        setTimeToDisplayItems={jest.fn()}
         filterOf="color"
         searchBy="red"
         textContent="Vermelho"

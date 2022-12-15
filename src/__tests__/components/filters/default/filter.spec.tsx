@@ -35,6 +35,8 @@ describe('', () => {
 
     renderTheme(
       <DefaultFilter
+        _timeToDisplayItems={false}
+        setTimeToDisplayItems={jest.fn()}
         filterOf="brand"
         searchBy="Nike"
         textContent="Nike"
