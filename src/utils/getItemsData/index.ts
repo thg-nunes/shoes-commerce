@@ -34,6 +34,10 @@ type UseReturnTotalPriceOfItemsParams = {
   itemsData: ItemsList;
 };
 
+type SearchOfTheFormParams = {
+  searchValue: string;
+};
+
 const getItemQuantityInList = ({
   id,
   itemsSavedInStorage = [],
@@ -107,10 +111,19 @@ const useReturnTotalPriceOfItems = ({
   return totalPrice;
 };
 
+const searchItemByFormText = async ({
+  searchValue,
+}: SearchOfTheFormParams): Promise<Response> => {
+  const { data } = await api.get<Response>(`/api/search/byForm/${searchValue}`);
+
+  return data;
+};
+
 export {
   searchItem,
   searchItemById,
   timeToDisplayItems,
+  searchItemByFormText,
   getItemQuantityInList,
   useReturnTotalPriceOfItems,
 };
