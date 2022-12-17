@@ -10,6 +10,7 @@ import Home from '@pages/home';
 import { theme } from '@styles/theme';
 import { renderTheme } from '@styles/render-theme';
 import { ThemeProvider } from 'styled-components';
+import { useItemsBySearchContext } from '@contexts/itemsBySearchForm';
 
 const apiMock = new AxiosMock(api);
 
@@ -18,6 +19,11 @@ jest.mock('react', () => {
     ...jest.requireActual('react'),
     useEffect: jest.fn().mockImplementation((callback) => callback()),
     useState: jest.fn(),
+  };
+});
+jest.mock('@contexts/itemsBySearchForm', () => {
+  return {
+    useItemsBySearchContext: jest.fn(),
   };
 });
 jest.mock('@contexts/shoppingCart/cart', () => {
@@ -32,6 +38,7 @@ jest.mock('@contexts/shoppingCart/cart', () => {
 const useEffectMock = useEffect as jest.Mock;
 const useStateMock = useState as jest.Mock;
 const useCartContextMock = useCartContext as jest.Mock;
+const useItemsBySearchContextMock = useItemsBySearchContext as jest.Mock;
 
 describe('<Home /> | Test E2E of home page', () => {
   const getItemSpy = jest.spyOn(Storage.prototype, 'getItem');
@@ -63,8 +70,25 @@ describe('<Home /> | Test E2E of home page', () => {
       price: 139.9,
     },
   ];
+  const itemsBySearchInitialValue = [];
+  const itemsBySearchFormResponse = [
+    {
+      id: 'ca19c56-86c2-40f2-b2ff-91d82d337600',
+      brand: 'Nike',
+      title: 'Tênis Nike Caminhada Confortável Detalhes Couro Masculino Preto.',
+      description:
+        'Tênis Nike Caminhada Confortável Detalhes Couro Masculino Preto, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.',
+      image:
+        'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg',
+      size: 29,
+      color: 'black',
+      stockQuantityQuantity: 9,
+      price: 139.9,
+    },
+  ];
 
   const setItemsMock = jest.fn().mockName('setItems');
+  const setTimeToDisplayItemsMock = jest.fn().mockName('setTimeToDisplayItems');
   const addItemMock = jest.fn().mockName('addItem');
 
   beforeEach(() => {
@@ -77,11 +101,15 @@ describe('<Home /> | Test E2E of home page', () => {
 
     useStateMock
       .mockReturnValueOnce([[], setItemsMock])
-      .mockReturnValueOnce([false, setItemsMock]);
+      .mockReturnValueOnce([false, setTimeToDisplayItemsMock]);
 
     useCartContextMock.mockReturnValueOnce({
       addItem: addItemMock,
       items: [],
+    });
+
+    useItemsBySearchContextMock.mockReturnValueOnce({
+      itemsBySearch: itemsBySearchInitialValue,
     });
   });
 
@@ -90,9 +118,15 @@ describe('<Home /> | Test E2E of home page', () => {
 
     expect(useEffectMock).toHaveBeenCalled();
 
+    await waitFor(() => expect(setTimeToDisplayItemsMock).toHaveBeenCalled());
+
     await waitFor(() => expect(setItemsMock).toHaveBeenCalledWith(responseApi));
 
     useStateMock.mockReturnValue([responseApi, setItemsMock]);
+
+    useItemsBySearchContextMock.mockReturnValueOnce({
+      itemsBySearch: itemsBySearchInitialValue,
+    });
 
     render(
       <ThemeProvider theme={theme}>
@@ -128,6 +162,10 @@ describe('<Home /> | Test E2E of home page', () => {
       items: [{ id: responseApi[0].id, quantity: 1 }],
     });
 
+    useItemsBySearchContextMock.mockReturnValueOnce({
+      itemsBySearch: itemsBySearchInitialValue,
+    });
+
     render(
       <ThemeProvider theme={theme}>
         <Home />
@@ -145,5 +183,23 @@ describe('<Home /> | Test E2E of home page', () => {
 
     expect(spansItemsQuantity.length).toBe(1);
     expect(spansItemsQuantity[0]).toBeInTheDocument();
+
+    useItemsBySearchContextMock.mockReturnValue({
+      itemsBySearch: itemsBySearchFormResponse,
+    });
+    useStateMock.mockReturnValue([itemsBySearchFormResponse, setItemsMock]);
+
+    render(
+      <ThemeProvider theme={theme}>
+        <Home />
+      </ThemeProvider>
+    );
+
+    expect(setItemsMock).toHaveBeenCalledWith(itemsBySearchFormResponse);
+
+    const titleOfItemSearched = await screen.findByText(
+      'Tênis Nike Caminhada Confortável Detalhes Couro Masculino Preto.'
+    );
+    expect(titleOfItemSearched).toBeInTheDocument();
   });
 });
