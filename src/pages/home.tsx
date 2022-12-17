@@ -9,22 +9,28 @@ import { SizeFilter } from '@components/filters/size';
 import { ColorFilter } from '@components/filters/color';
 
 import * as Styled from '@styles/pages/homePage/styled';
+import { useItemsBySearchContext } from '@contexts/itemsBySearchForm';
 
 export default function Home(): JSX.Element {
   const [items, setItems] = useState<ItemsList>([]);
   const [timeToDisplayItems, setTimeToDisplayItems] = useState(false);
+  const { itemsBySearch } = useItemsBySearchContext();
 
   useEffect(() => {
     const getItems = async (): Promise<void> => {
-      const { data } = await api.get('/api/items/all');
-      setItems(data.items.data);
+      if (itemsBySearch.length !== 0) {
+        setItems(itemsBySearch);
+      } else {
+        const { data } = await api.get('/api/items/all');
+        setItems(data.items.data);
+      }
     };
 
     setTimeout(() => {
       setTimeToDisplayItems(!timeToDisplayItems);
     }, 750);
     getItems();
-  }, []);
+  }, [itemsBySearch]);
 
   return items.length !== 0 ? (
     <Styled.Container>
