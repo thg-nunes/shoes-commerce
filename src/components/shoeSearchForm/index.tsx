@@ -14,11 +14,15 @@ export function ShoeSearchForm(): JSX.Element {
       onSubmit={async (e: FormEvent) => {
         e.preventDefault();
 
-        const { items } = await searchItemByFormText({
-          searchValue: initialInputValue,
-        });
+        if (initialInputValue) {
+          const { items } = await searchItemByFormText({
+            searchValue: initialInputValue,
+          });
 
-        setItemsBySearch(items);
+          setItemsBySearch(items);
+        } else {
+          setItemsBySearch([]);
+        }
       }}
     >
       <Styled.Input
