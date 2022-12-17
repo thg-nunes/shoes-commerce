@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
+import { useItemsBySearchContext } from '@contexts/itemsBySearchForm';
 import { searchItemByFormText } from '@utils/getItemsData';
 
 import { ShoeSearchForm } from '@components/shoeSearchForm';
 import { renderTheme } from '@styles/render-theme';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '@styles/theme';
 
 jest.mock('react', () => {
   return {
     ...jest.requireActual('react'),
     useState: jest.fn(),
+  };
+});
+jest.mock('@contexts/itemsBySearchForm', () => {
+  return {
+    useItemsBySearchContext: jest.fn(),
   };
 });
 jest.mock('@utils/getItemsData', () => {
@@ -22,39 +30,45 @@ jest.mock('@utils/getItemsData', () => {
     useReturnTotalPriceOfItems: jest.fn(),
   };
 });
-const searchItemByFormTextMock = searchItemByFormText as jest.Mock;
 const useStateMock = useState as jest.Mock;
+const useItemsBySearchContextMock = useItemsBySearchContext as jest.Mock;
+const searchItemByFormTextMock = searchItemByFormText as jest.Mock;
 
 describe('', () => {
   const initialInputValue = '';
   const setInputValue = jest.fn();
+  const itemsBySearchFormResponse = [
+    {
+      id: 'ca19c56-86c2-40f2-b2ff-91d82d337600',
+      brand: 'Nike',
+      title: 'Tênis Nike Caminhada Confortável Detalhes Couro Masculino Preto.',
+      description:
+        'Tênis Nike Caminhada Confortável Detalhes Couro Masculino Preto, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.',
+      image:
+        'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg',
+      size: 29,
+      color: 'black',
+      stockQuantityQuantity: 9,
+      price: 139.9,
+    },
+  ];
+
+  const itemsBySearchFormInitialValue = [];
+  const setItemsBySearchForm = jest.fn();
 
   beforeEach(() => {
     useStateMock.mockReturnValueOnce([initialInputValue, setInputValue]);
     searchItemByFormTextMock.mockResolvedValueOnce({
       status: 'success',
-      items: {
-        data: [
-          {
-            id: 'ca19c56-86c2-40f2-b2ff-91d82d337600',
-            brand: 'Nike',
-            title:
-              'Tênis Nike Caminhada Confortável Detalhes Couro Masculino Preto.',
-            description:
-              'Tênis Nike Caminhada Confortável Detalhes Couro Masculino Preto, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.',
-            image:
-              'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg',
-            size: 29,
-            color: 'black',
-            stockQuantityQuantity: 9,
-            price: 139.9,
-          },
-        ],
-      },
+      items: itemsBySearchFormResponse,
+    });
+    useItemsBySearchContextMock.mockReturnValueOnce({
+      itemsBySearch: itemsBySearchFormInitialValue,
+      setItemsBySearch: setItemsBySearchForm,
     });
   });
 
-  it('ensures that the form performs the function correctly', () => {
+  it('ensures that the form performs the function correctly', async () => {
     renderTheme(<ShoeSearchForm />);
 
     expect(useStateMock).toHaveBeenCalled();
@@ -75,6 +89,12 @@ describe('', () => {
 
     fireEvent.submit(form);
 
-    // testar função que faz a requisição com o valor digitado no input
+    expect(searchItemByFormTextMock).toHaveBeenCalled();
+
+    await waitFor(() =>
+      expect(setItemsBySearchForm).toHaveBeenCalledWith(
+        itemsBySearchFormResponse
+      )
+    );
   });
 });
