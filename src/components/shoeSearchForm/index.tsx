@@ -1,6 +1,8 @@
+import { FormEvent, useState } from 'react';
+import { BiSearchAlt } from 'react-icons/bi';
+
 import { useItemsBySearchContext } from '@contexts/itemsBySearchForm';
 import { searchItemByFormText } from '@utils/getItemsData';
-import { FormEvent, useState } from 'react';
 import * as Styled from './styled';
 
 export function ShoeSearchForm(): JSX.Element {
@@ -24,6 +26,7 @@ export function ShoeSearchForm(): JSX.Element {
         value={initialInputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
+      <BiSearchAlt fill="#1A1921" />
     </Styled.Container>
   );
 }

@@ -48,3 +48,31 @@ export const TextSection = styled.section`
     color: ${({ theme }) => theme.colors.gray[400]};
   }
 `;
+
+export const CartAndInputForm = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 0.5rem;
+
+  form {
+    text-align: end;
+
+    input {
+      width: 70%;
+      padding: 0.15rem 0;
+      padding-left: 0.5rem;
+      border: none;
+      background: ${({ theme }) => theme.colors.white[100]};
+      outline: none;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+      transition: 250ms all linear;
+
+      :focus {
+        width: 100%;
+      }
+    }
+  }
+`;

@@ -3,13 +3,11 @@ import { GiSonicShoes, GiBeachBag } from 'react-icons/gi';
 
 import { useCartContext } from '@contexts/shoppingCart/cart';
 
-import { useState } from 'react';
 import { ShoeSearchForm } from '@components/shoeSearchForm';
 import * as Styled from './styled';
 
 export function Header(): JSX.Element {
   const { items } = useCartContext();
-  const [initialInputValue, setInitialInputValue] = useState();
 
   return (
     <Styled.Container>
@@ -21,7 +19,7 @@ export function Header(): JSX.Element {
           </Styled.Logo>
         </a>
       </Link>
-      <section>
+      <Styled.CartAndInputForm>
         <ShoeSearchForm />
         <Link href="/cart" passHref>
           <a>
@@ -34,7 +32,7 @@ export function Header(): JSX.Element {
             </Styled.ShoppingCart>
           </a>
         </Link>
-      </section>
+      </Styled.CartAndInputForm>
     </Styled.Container>
   );
 }
