@@ -19,16 +19,25 @@ export default function Home(): JSX.Element {
   useEffect(() => {
     const getItems = async (): Promise<void> => {
       if (itemsBySearch.length !== 0) {
+        setTimeToDisplayItems(false);
+
         setItems(itemsBySearch);
+
+        setTimeout(() => {
+          setTimeToDisplayItems(true);
+        }, 1000);
       } else {
+        setTimeToDisplayItems(false);
+
         const { data } = await api.get('/api/items/all');
         setItems(data.items.data);
+
+        setTimeout(() => {
+          setTimeToDisplayItems(true);
+        }, 1000);
       }
     };
 
-    setTimeout(() => {
-      setTimeToDisplayItems(!timeToDisplayItems);
-    }, 750);
     getItems();
   }, [itemsBySearch]);
 
