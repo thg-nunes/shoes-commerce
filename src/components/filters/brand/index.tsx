@@ -5,7 +5,7 @@ import { timeToDisplayItems } from '@utils/getItemsData';
 import { ItemsList } from '@templates/itemsExposiotion';
 import * as Styled from './styled';
 
-export type DefaultFilterProps = {
+export type BrandFilterProps = {
   searchBy: string;
   textContent?: string;
   filterOf: 'brand' | 'size' | 'color';
@@ -14,14 +14,14 @@ export type DefaultFilterProps = {
   setItems: Dispatch<SetStateAction<ItemsList>>;
 };
 
-export function DefaultFilter({
+export function BrandFilter({
   searchBy,
   textContent,
   filterOf = 'brand',
   setItems,
   _timeToDisplayItems = false,
   setTimeToDisplayItems,
-}: DefaultFilterProps): JSX.Element {
+}: BrandFilterProps): JSX.Element {
   return (
     <Styled.Container
       onClick={async () => {
