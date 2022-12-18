@@ -1,7 +1,7 @@
 import { searchItem } from '@utils/getItemsData';
 import { timeToDisplayItems } from '@utils/getItemsData';
 
-import { DefaultFilterProps } from '../default';
+import { BrandFilterProps } from '../brand';
 
 import * as Styled from './styled';
 
@@ -12,7 +12,7 @@ export function SizeFilter({
   _timeToDisplayItems = false,
   setTimeToDisplayItems,
   setItems,
-}: DefaultFilterProps): JSX.Element {
+}: BrandFilterProps): JSX.Element {
   return (
     <Styled.SizeOption
       onClick={async () => {
