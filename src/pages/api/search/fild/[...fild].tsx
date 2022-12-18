@@ -10,9 +10,34 @@ export default function returnItemsByBrand(
     const { fild } = req.query;
     const [fildSelected, value] = fild;
 
-    const responseByBrand = items.data.filter(
-      (item) => item[fildSelected] === value
-    );
+    let responseByBrand = [];
+
+    switch (fildSelected) {
+      case 'brand':
+        responseByBrand = items.data.filter(
+          (item) => item[fildSelected] === value
+        );
+        break;
+      case 'size':
+        items.data.forEach((item) =>
+          item[fildSelected].map((element) => {
+            if (element === Number(value)) {
+              responseByBrand.push(item);
+            }
+          })
+        );
+        break;
+      case 'color':
+        responseByBrand = items.data.filter(
+          (item) =>
+            item[fildSelected] === value ||
+            item.title.toLowerCase().match(value.toLowerCase()) ||
+            item.description.toLowerCase().match(value.toLowerCase())
+        );
+        break;
+      default:
+        break;
+    }
 
     return res.json({
       status: 'success',
