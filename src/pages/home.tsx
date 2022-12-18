@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { api } from '@services/axios';
 import { ItemsExposition, ItemsList } from '@templates/itemsExposiotion';
-import { DefaultFilter } from '@components/filters/default';
+import { BrandFilter } from '@components/filters/brand';
 
 import { Loading } from '@components/loading';
 import { SizeFilter } from '@components/filters/size';
@@ -50,7 +50,7 @@ export default function Home(): JSX.Element {
           <Styled.BrandFilters>
             <p>Marca</p>
             <ul>
-              <DefaultFilter
+              <BrandFilter
                 setTimeToDisplayItems={setTimeToDisplayItems}
                 _timeToDisplayItems={timeToDisplayItems}
                 setItems={setItems}
@@ -58,7 +58,7 @@ export default function Home(): JSX.Element {
                 searchBy="Nike"
                 textContent="Nike"
               />
-              <DefaultFilter
+              <BrandFilter
                 setTimeToDisplayItems={setTimeToDisplayItems}
                 _timeToDisplayItems={timeToDisplayItems}
                 setItems={setItems}
@@ -66,13 +66,61 @@ export default function Home(): JSX.Element {
                 searchBy="Adidas"
                 textContent="Adidas"
               />
-              <DefaultFilter
+              <BrandFilter
                 setTimeToDisplayItems={setTimeToDisplayItems}
                 _timeToDisplayItems={timeToDisplayItems}
                 setItems={setItems}
                 filterOf="brand"
-                searchBy="Vans"
-                textContent="Vans"
+                searchBy="Vr"
+                textContent="Vr"
+              />
+              <BrandFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                setItems={setItems}
+                filterOf="brand"
+                searchBy="Asics"
+                textContent="Asics"
+              />
+              <BrandFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                setItems={setItems}
+                filterOf="brand"
+                searchBy="Oakley"
+                textContent="Oakley"
+              />
+              <BrandFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                setItems={setItems}
+                filterOf="brand"
+                searchBy="Mizuno"
+                textContent="Mizuno"
+              />
+              <BrandFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                setItems={setItems}
+                filterOf="brand"
+                searchBy="Skechers"
+                textContent="Skechers"
+              />
+              <BrandFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                setItems={setItems}
+                filterOf="brand"
+                searchBy="Mizuno"
+                textContent="Mizuno"
+              />
+              <BrandFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                setItems={setItems}
+                filterOf="brand"
+                searchBy="Olympikus"
+                textContent="Olympikus"
               />
             </ul>
           </Styled.BrandFilters>
