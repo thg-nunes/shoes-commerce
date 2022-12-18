@@ -203,7 +203,7 @@ export default function Home(): JSX.Element {
                 _timeToDisplayItems={timeToDisplayItems}
                 filterOf="color"
                 setItems={setItems}
-                searchBy="red"
+                searchBy="Vermelho"
                 textContent="Vermelho"
               />
               <ColorFilter
@@ -211,7 +211,7 @@ export default function Home(): JSX.Element {
                 _timeToDisplayItems={timeToDisplayItems}
                 filterOf="color"
                 setItems={setItems}
-                searchBy="green"
+                searchBy="Verde"
                 textContent="Verde"
               />
               <ColorFilter
@@ -219,7 +219,7 @@ export default function Home(): JSX.Element {
                 _timeToDisplayItems={timeToDisplayItems}
                 filterOf="color"
                 setItems={setItems}
-                searchBy="blue"
+                searchBy="Azul"
                 textContent="Azul"
               />
               <ColorFilter
@@ -227,7 +227,7 @@ export default function Home(): JSX.Element {
                 _timeToDisplayItems={timeToDisplayItems}
                 filterOf="color"
                 setItems={setItems}
-                searchBy="white"
+                searchBy="Branco"
                 textContent="Branco"
               />
               <ColorFilter
@@ -235,7 +235,7 @@ export default function Home(): JSX.Element {
                 _timeToDisplayItems={timeToDisplayItems}
                 filterOf="color"
                 setItems={setItems}
-                searchBy="black"
+                searchBy="Preto"
                 textContent="Preto"
               />
               <ColorFilter
@@ -243,7 +243,7 @@ export default function Home(): JSX.Element {
                 _timeToDisplayItems={timeToDisplayItems}
                 filterOf="color"
                 setItems={setItems}
-                searchBy="yellow"
+                searchBy="Amarelo"
                 textContent="Amarelo"
               />
               <ColorFilter
@@ -251,8 +251,16 @@ export default function Home(): JSX.Element {
                 _timeToDisplayItems={timeToDisplayItems}
                 filterOf="color"
                 setItems={setItems}
-                searchBy="perple"
-                textContent="Roxo"
+                searchBy="Pink"
+                textContent="Pink"
+              />
+              <ColorFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                filterOf="color"
+                setItems={setItems}
+                searchBy="Marinho"
+                textContent="Marinho"
               />
             </ul>
           </Styled.ColorFilters>
