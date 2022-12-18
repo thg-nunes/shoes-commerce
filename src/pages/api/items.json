@@ -6,9 +6,9 @@
       "title": "Tênis VR Caminhada Confortável Detalhes Couro Masculino.",
       "description": "Tênis VR Caminhada Confortável Detalhes Couro Masculino, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis1.jpg",
-      "size": 35,
-      "color": "black",
-      "stockQuantity": 9,
+      "size": [30, 32, 36],
+      "color": "preto",
+      "stockQuantity": 3,
       "price": 139.90
     },
     {
@@ -17,9 +17,9 @@
       "title": "Tênis VR Caminhada Confortável Detalhes Couro Masculino.",
       "description": "Tênis VR Caminhada Confortável Detalhes Couro Masculino, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.",
       "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg",
-      "size": 29,
-      "color": "black",
-      "stockQuantity": 9,
+      "size": [29, 32, 35],
+      "color": "preto",
+      "stockQuantity": 2,
       "price": 139.90
     },
     {
@@ -28,8 +28,8 @@
       "title": "Tênis Asics Gel Equation 11 Masculino - Preto+Prata",
       "description": "AHAR: Borracha com formulação especial para resistir ao desgaste, localizada no calcanhar. Gel: Sistema de amortecimento em GEL que oferece melhor absorção de impacto.",
       "image": "https://static.netshoes.com.br/produtos/tenis-asics-gel-equation-11-masculino/38/2FV-8435-038/2FV-8435-038_zoom1.jpg?ts=1643961823&ims=544x",
-      "size": 37,
-      "color": "black",
+      "size": [37],
+      "color": "preto",
       "indicado_para": "Corrida",
       "stockQuantity": 4,
       "price": 256.90
@@ -40,10 +40,10 @@
       "title": "Tênis Adidas Coreracer Feminino - Preto",
       "description": "Com um cabedal confeccionado com material têxtil, a parte de cima do calçado conta também com tramas em mesh que garantem circulação de ar e ótima respirabilidade entre uma passada e outra.",
       "image": "https://static.netshoes.com.br/produtos/tenis-adidas-coreracer-feminino/93/NQQ-4636-793/NQQ-4636-793_zoom1.jpg?ts=1665494106&ims=544x",
-      "size": 39,
-      "color": "black",
+      "size": [39],
+      "color": "preto",
       "indicado_para": ["Caminhada", "Corrida"],
-      "stockQuantity": 24,
+      "stockQuantity": 1,
       "price": 199.90
     },
     {
@@ -52,8 +52,8 @@
       "title": "Tênis Adidas Runfalcon 2.0 Feminino - Preto",
       "description": "Com cabedal em mesh e couro sintético, o Tênis Adidas Runfalcon 2.0 Feminino é a escolha certa para durabilidade e conforto nos seus treinos diários.",
       "image": "https://static.netshoes.com.br/produtos/tenis-adidas-runfalcon-20-feminino/06/NQQ-6922-006/NQQ-6922-006_zoom1.jpg?ts=1612439270&ims=544x",
-      "size": 36,
-      "color": "black",
+      "size": [34, 36, 38],
+      "color": "preto",
       "indicado_para": ["Caminhada", "Corrida"],
       "stockQuantity": 1,
       "price": 208.99
@@ -64,8 +64,8 @@
       "title": "Tênis Oakley Stratus Masculino - Preto+Vermelho",
       "description": " O cabedal é confeccionado em material sintético para firmeza e resistência, forro levemente acolchoado, tira de fácil calce e palmilha macia que fornece conforto.",
       "image": "https://static.netshoes.com.br/produtos/tenis-oakley-stratus-masculino/02/PFN-1494-002/PFN-1494-002_detalhe1.jpg?ts=1656362283?ims=280x280",
-      "size": 37,
-      "color": "black",
+      "size": [35, 37, 39],
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 2,
       "price": 313.49
@@ -77,9 +77,9 @@
       "description": "*Possui forma pequena, para um melhor ajuste nos pés, recomendamos a compra de um tamanho maior do que o seu usual.* Aposte no conforto e qualidade do novo Tênis de Corrida Masculino da Mizuno para te acompanhar nos seus treinos diários. ",
       "image": "https://static.netshoes.com.br/produtos/tenis-mizuno-wave-titan-2-masculino/06/2FU-6367-006/2FU-6367-006_zoom1.jpg?ts=1657368380&ims=544x",
       "size": [35,36,37],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
-      "stockQuantity": 7,
+      "stockQuantity": 4,
       "price": 218.49
     },
     {
@@ -89,9 +89,9 @@
       "description": " Têxtil e sintético, esculpido para maior firmeza sem limitar os movimentos explosivos dentro da quadra.",
       "image": "https://static.netshoes.com.br/produtos/tenis-nike-precision-vi-masculino/02/2IC-7496-002/2IC-7496-002_zoom1.jpg?ts=1655749741&ims=544x",
       "size": [38],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
-      "stockQuantity": 21,
+      "stockQuantity": 3,
       "price": 398.99
     },
     {
@@ -101,7 +101,7 @@
       "description": "Quem corre regularmente, sabe: um bom tênis faz a diferença na busca pelo melhor pace ou para atingir novas distâncias. É por isso que o novo Nike Revolution 6 é o running ideal para a rapaziada que quer se superar e ir cada vez mais longe.",
       "image": "https://static.netshoes.com.br/produtos/tenis-nike-revolution-6-masculino/04/2IC-7576-304/2IC-7576-304_zoom1.jpg?ts=1648682837&ims=544x",
       "size": [40],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Caminhada"],
       "stockQuantity": 4,
       "price": 229.99
@@ -113,7 +113,7 @@
       "description": "O tênis Oakley Modoc Low II tem design robusto, com sola que favorece a aderência e cabedal em material de alta qualidade, com recortes em detalhe. Este modelo conta com cadarço ajustável e alça no cano, para maior praticidade na hora de calçar. Invista!",
       "image": "https://static.netshoes.com.br/produtos/tenis-oakley-modoc-low-ii-masculino/75/PFN-4117-375/PFN-4117-375_zoom1.jpg?ts=1656436654&ims=544x",
       "size": [40],
-      "color": "brown",
+      "color": "marrom",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 3,
       "price": 427.49
@@ -125,7 +125,7 @@
       "description": "Com design versátil para o treino e dia a dia, o Tênis Mizuno Cometa é a escolha para te acompanhar no sportwear com estilo e conforto. É confeccionado em material macio e respirável com forro colchoado.",
       "image": "https://static.netshoes.com.br/produtos/tenis-mizuno-cometa/26/2FU-5849-026/2FU-5849-026_zoom1.jpg?ts=1643916928&ims=544x",
       "size": [35, 37, 38, 40],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 4,
       "price": 179.90
@@ -137,7 +137,7 @@
       "description": "Com design versátil para o treino e dia a dia, o Tênis Mizuno Cometa é a escolha para te acompanhar no sportwear com estilo e conforto. É confeccionado em material macio e respirável com forro colchoado.",
       "image": "https://static.netshoes.com.br/produtos/tenis-mizuno-cometa/06/2FU-5849-006/2FU-5849-006_zoom1.jpg?ts=1640592105&ims=544x",
       "size": [39, 40, 41],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 2,
       "price": 189.90
@@ -149,7 +149,7 @@
       "description": "Com design moderno, o running indicado para caminhadas e corridas leves possui cabedal fabricado com material macio e respirável que garante mais frescor durante o uso. ",
       "image": "https://static.netshoes.com.br/produtos/tenis-mizuno-brave-6/06/2FU-6366-006/2FU-6366-006_zoom1.jpg?ts=1657368377&ims=544x",
       "size": [35, 36, 37, 38, 39],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 0,
       "price": 199.99
@@ -161,7 +161,7 @@
       "description": "Com design moderno, o running indicado para caminhadas e corridas leves possui cabedal fabricado com material macio e respirável que garante mais frescor durante o uso.",
       "image": "https://static.netshoes.com.br/produtos/tenis-adidas-coreracer-feminino/93/NQQ-4636-793/NQQ-4636-793_zoom1.jpg?ts=1665494106&ims=544x",
       "size": [39, 40, 41, 42, 43],
-      "color": "lead",
+      "color": "chumbo",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 5,
       "price": 189.90
@@ -173,7 +173,7 @@
       "description": "Com design versátil para a corrida na academia ou na rua, o Tênis Mizuno Cometa Masculino é a escolha para os corredores iniciantes.  ",
       "image": "https://static.netshoes.com.br/produtos/tenis-mizuno-cometa-masculino/02/2FU-5852-002/2FU-5852-002_zoom1.jpg?ts=1657368373&ims=544x",
       "size": [39, 40, 41, 42],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 1,
       "price": 179.90
@@ -185,7 +185,7 @@
       "description": "Se você é um homem que busca conforto e versatilidade do dia a dia ao esporte, o Tênis Mizuno Action 2 Masculino é a escolha certa.",
       "image": "https://static.netshoes.com.br/produtos/tenis-mizuno-action-2-masculino/06/2FU-5856-006/2FU-5856-006_zoom1.jpg?ts=1643834959&ims=544x",
       "size": [39, 40, 41, 42],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Caminhada", "Corrida"],
       "stockQuantity": 7,
       "price": 199.90
@@ -197,7 +197,7 @@
       "description": "Com design versátil para a corrida na academia ou na rua, o Tênis Mizuno Space 2 Masculino é a escolha para os corredores iniciantes.",
       "image": "https://static.netshoes.com.br/produtos/tenis-mizuno-space-2-masculino/06/2FU-5858-006/2FU-5858-006_zoom1.jpg?ts=1643834986&ims=544x",
       "size": [35, 36, 37],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 3,
       "price": 199.49
@@ -209,7 +209,7 @@
       "description": "Com um cabedal produzido em tecido respirável, o calçado possui calcanhar acolchoado para suporte e puxador para fácil calce. ",
       "image": "https://static.netshoes.com.br/produtos/tenis-skechers-bountiful-quick-path-feminino/90/EUZ-6291-390/EUZ-6291-390_zoom1.jpg?ts=1651376293&ims=544x",
       "size": [34, 35, 36],
-      "color": "light green",
+      "color": "verde claro",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 3,
       "price": 279.90
@@ -221,7 +221,7 @@
       "description": "Com um cabedal produzido em tecido respirável, o calçado possui calcanhar acolchoado para suporte e puxador para fácil calce. ",
       "image": "https://static.netshoes.com.br/produtos/tenis-skechers-bountiful-quick-path-feminino/72/EUZ-6291-172/EUZ-6291-172_zoom1.jpg?ts=1653049950&ims=544x",
       "size": [34, 35, 36, 37],
-      "color": "beige",
+      "color": "bege",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 4,
       "price": 237.90
@@ -229,11 +229,11 @@
     {
       "id": "20",
       "brand": "Skechers",
-      "title": "Tênis Skechers Bountiful Quick Path Feminino - Preto+Branco",
+      "title": "Tênis Skechers Bountiful Quick Path Feminino - black+Branco",
       "description": "Aposte no conforto e qualidade do Tênis Feminino da Skechers. Com um cabedal produzido em tecido respirável, o calçado possui calcanhar acolchoado para suporte e puxador para fácil calce.",
       "image": "https://static.netshoes.com.br/produtos/tenis-skechers-bountiful-quick-path-feminino/26/EUZ-6291-026/EUZ-6291-026_zoom1.jpg?ts=1632845551&ims=544x",
       "size": [34, 37, 38],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 1,
       "price": 189.90
@@ -245,7 +245,7 @@
       "description": "Aposte no conforto e qualidade do Tênis Feminino da Skechers. Com um cabedal produzido em tecido respirável, o calçado possui calcanhar acolchoado para suporte e puxador para fácil calce.",
       "image": "https://static.netshoes.com.br/produtos/tenis-skechers-bountiful-quick-path-feminino/78/EUZ-6291-778/EUZ-6291-778_zoom1.jpg?ts=1634565945&ims=544x",
       "size": [34, 35, 36],
-      "color": "marine",
+      "color": "marinho",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 2,
       "price": 235.90
@@ -257,7 +257,7 @@
       "description": "Saia para correr com o Tênis Masculino Asics Gel Equation 11! Confeccionado com material têxtil respirável e sintético que garante frescor e conforto para os seus pés durante o treino.",
       "image": "https://static.netshoes.com.br/produtos/tenis-asics-gel-equation-11-masculino/38/2FV-8435-038/2FV-8435-038_zoom1.jpg?ts=1643961823&ims=544x",
       "size": [39, 41, 43],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Corrida"],
       "stockQuantity": 4,
       "price": 256.49
@@ -269,7 +269,7 @@
       "description": "Esse tênis running é construído em cabedal têxtil com tramas abertas que garantem maior respirabilidade dos pés, forro acolchoado e ajuste em cadarço com um sétimo furo para ajuste mais firme.",
       "image": "https://static.netshoes.com.br/produtos/tenis-asics-gel-sparta-masculino/36/2FV-8436-036/2FV-8436-036_zoom1.jpg?ts=1644579366&ims=544x",
       "size": [41, 43],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Corrida"],
       "stockQuantity": 5,
       "price": 349.90
@@ -280,8 +280,8 @@
       "title": "Tênis Adidas Coreracer Feminino - Preto",
       "description": "Com um cabedal confeccionado com material têxtil, a parte de cima do calçado conta também com tramas em mesh que garantem circulação de ar e ótima respirabilidade entre uma passada e outra.",
       "image": "https://static.netshoes.com.br/produtos/tenis-adidas-coreracer-feminino/93/NQQ-4636-793/NQQ-4636-793_zoom1.jpg?ts=1665494106&ims=544x",
-      "size": 39,
-      "color": "black",
+      "size": [39, 41],
+      "color": "preto",
       "indicado_para": ["Caminhada", "Corrida"],
       "stockQuantity": 24,
       "price": 199.90
@@ -293,7 +293,7 @@
       "description": "Para caminhadas, corridas leves ou uso diário, aposte no conforto e qualidade do Tênis Olympikus para completar seu look esportivo. Produzido com material macio, o modelo conta com tecnologia na entressola que proporciona alto nível de maciez e uma passada mais suave.",
       "image": "https://static.netshoes.com.br/produtos/tenis-olympikus-anyway-2-feminino/06/2I2-2584-006/2I2-2584-006_zoom1.jpg?ts=1630002583&ims=544x",
       "size": [34, 35, 36, 37],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 4,
       "price": 129.90
@@ -304,8 +304,8 @@
       "title": "Tênis Olympikus Anyway 2 Feminino - Marinho",
       "description": "Produzido com material macio, o modelo conta com tecnologia na entressola que proporciona alto nível de maciez e uma passada mais suave. O solado de borracha garante ótima aderência e tração em diferentes tipos de piso.",
       "image": "https://static.netshoes.com.br/produtos/tenis-olympikus-anyway-2-feminino/12/2I2-2584-012/2I2-2584-012_zoom1.jpg?ts=1630002855&ims=544x",
-      "size": 39,
-      "color": "marine",
+      "size": [28, 35, 36],
+      "color": "marinho",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 6,
       "price": 139.90
@@ -317,7 +317,7 @@
       "description": "O seu solado possui a tecnologia de amortecimento Eleva+ que explora o limite de expansão do EVA, extremamente leve, proporcionando máxima resposta, mantendo conforto e durabilidade.",
       "image": "https://static.netshoes.com.br/produtos/tenis-olympikus-masculino-wellness-sem-cadarco-slip-on/08/2I2-6794-008/2I2-6794-008_zoom1.jpg?ts=1670490591&ims=544x",
       "size": [37, 38, 39, 40, 41],
-      "color": "blue",
+      "color": "azul",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 3,
       "price": 218.49
@@ -329,7 +329,7 @@
       "description": "O cabedal confeccionado em material têxtil, traz palmilha em PU com tecnologia de memoria elástica que proporciona maior conforto durante as passadas e o solado em EVA gera alto nível de maciez.",
       "image": "https://static.netshoes.com.br/produtos/tenis-olympikus-sem-cadarco-lap-946/06/2I2-2626-006/2I2-2626-006_zoom1.jpg?ts=1670436582&ims=544x",
       "size": [40, 42, 43],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Dia a Dia"],
       "stockQuantity": 1,
       "price": 169.90
@@ -341,7 +341,7 @@
       "description": "Com um cabedal confeccionado com material têxtil, a parte de cima do calçado conta também com tramas em mesh que garantem circulação de ar e ótima respirabilidade entre uma passada e outra.",
       "image": "https://static.netshoes.com.br/produtos/tenis-adidas-coreracer-feminino/93/NQQ-4636-793/NQQ-4636-793_zoom1.jpg?ts=1665494106&ims=544x",
       "size": [39],
-      "color": "black",
+      "color": "preto",
       "indicado_para": ["Caminhada", "Corrida"],
       "stockQuantity": 24,
       "price": 199.90
