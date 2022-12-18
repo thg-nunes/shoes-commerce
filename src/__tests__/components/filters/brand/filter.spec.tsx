@@ -2,7 +2,7 @@ import { fireEvent, screen, waitFor } from '@testing-library/react';
 
 import { searchItem } from '@utils/getItemsData';
 
-import { DefaultFilter } from '@components/filters/default';
+import { BrandFilter } from '@components/filters/brand';
 
 import { renderTheme } from '@styles/render-theme';
 
@@ -38,7 +38,7 @@ describe('', () => {
     const setItems = jest.fn();
 
     renderTheme(
-      <DefaultFilter
+      <BrandFilter
         _timeToDisplayItems={false}
         setTimeToDisplayItems={jest.fn()}
         filterOf="brand"
