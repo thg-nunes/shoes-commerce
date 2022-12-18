@@ -10,7 +10,7 @@ export const Container = styled.div`
 
   > section {
     display: grid;
-    grid-gap: 1rem;
+    grid-gap: 1.5rem;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 
