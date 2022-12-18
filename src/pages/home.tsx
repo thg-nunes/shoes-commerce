@@ -219,8 +219,40 @@ export default function Home(): JSX.Element {
                 _timeToDisplayItems={timeToDisplayItems}
                 filterOf="color"
                 setItems={setItems}
+                searchBy="Chumbo"
+                textContent="Chumbo"
+              />
+              <ColorFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                filterOf="color"
+                setItems={setItems}
                 searchBy="Azul"
                 textContent="Azul"
+              />
+              <ColorFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                filterOf="color"
+                setItems={setItems}
+                searchBy="Marinho"
+                textContent="Marinho"
+              />
+              <ColorFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                filterOf="color"
+                setItems={setItems}
+                searchBy="Bege"
+                textContent="Bege"
+              />
+              <ColorFilter
+                setTimeToDisplayItems={setTimeToDisplayItems}
+                _timeToDisplayItems={timeToDisplayItems}
+                filterOf="color"
+                setItems={setItems}
+                searchBy="Marrom"
+                textContent="Marrom"
               />
               <ColorFilter
                 setTimeToDisplayItems={setTimeToDisplayItems}
