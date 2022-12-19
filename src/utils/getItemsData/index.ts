@@ -16,6 +16,11 @@ type SearchItemProps = {
   filterOf: 'brand' | 'size' | 'color';
 };
 
+type SearchByPriceProps = {
+  lowestPrice: number;
+  highestPrice: number;
+};
+
 type Response = {
   status: 'success' | 'error';
   items: ItemsList;
@@ -54,6 +59,20 @@ const searchItem = async ({
   const { data } = await api.get<Response>(
     `/api/search/fild/${filterOf}/${searchBy}`
   );
+
+  return data;
+};
+
+const searchByPrice = async ({
+  lowestPrice,
+  highestPrice,
+}: SearchByPriceProps): Promise<Response> => {
+  const { data } = await api.get<Response>(`/api/search/price`, {
+    data: {
+      lowestPrice,
+      highestPrice,
+    },
+  });
 
   return data;
 };
@@ -121,6 +140,7 @@ const searchItemByFormText = async ({
 
 export {
   searchItem,
+  searchByPrice,
   searchItemById,
   timeToDisplayItems,
   searchItemByFormText,
