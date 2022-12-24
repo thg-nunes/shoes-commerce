@@ -14,6 +14,7 @@ import { ItemsList } from '@templates/itemsExposiotion';
 import { Footer } from '@components/footer';
 
 import * as Styled from '@styles/pages/cart/styled';
+import Head from 'next/head';
 
 type StorageItems = {
   id: string;
@@ -70,6 +71,9 @@ export default function Cart(): JSX.Element {
 
   return (
     <>
+      <Head>
+        <title>C-SHOES | Cart</title>
+      </Head>
       <Styled.Container hasItemInCartList={!!items.length}>
         <Styled.Table>
           <Styled.TableHead>
