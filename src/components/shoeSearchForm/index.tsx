@@ -14,7 +14,7 @@ export function ShoeSearchForm(): JSX.Element {
       onSubmit={async (e: FormEvent) => {
         e.preventDefault();
 
-        if (initialInputValue) {
+        if (initialInputValue !== '') {
           const { items } = await searchItemByFormText({
             searchValue: initialInputValue,
           });
