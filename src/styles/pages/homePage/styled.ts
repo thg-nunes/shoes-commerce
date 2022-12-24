@@ -105,3 +105,15 @@ export const MessageInfo = styled.section`
     }
   }
 `;
+
+export const FormSearchByPrice = styled(BrandFilters)`
+  :hover {
+    form {
+      height: auto;
+
+      border-top: 1px solid ${({ theme }) => theme.colors.gray[250]};
+
+      padding: 1rem;
+    }
+  }
+`;
