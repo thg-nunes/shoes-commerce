@@ -5,11 +5,13 @@ import {
   AiTwotoneDelete,
 } from 'react-icons/ai';
 
-import { ItemsList } from '@templates/itemsExposiotion';
+import { useCartContext } from '@contexts/shoppingCart/cart';
 
 import { searchItemById } from '@utils/getItemsData';
 import { useReturnTotalPriceOfItems } from '@utils/getItemsData';
-import { useCartContext } from '@contexts/shoppingCart/cart';
+
+import { ItemsList } from '@templates/itemsExposiotion';
+import { Footer } from '@components/footer';
 
 import * as Styled from '@styles/pages/cart/styled';
 
@@ -67,75 +69,78 @@ export default function Cart(): JSX.Element {
   }, [items]);
 
   return (
-    <Styled.Container hasItemInCartList={!!items.length}>
-      <Styled.Table>
-        <Styled.TableHead>
-          <Styled.TableRow>
-            <th />
-            <th>PRODUTO</th>
-            <th>QTD</th>
-            <th>SUBTOTAL</th>
-          </Styled.TableRow>
-        </Styled.TableHead>
+    <>
+      <Styled.Container hasItemInCartList={!!items.length}>
+        <Styled.Table>
+          <Styled.TableHead>
+            <Styled.TableRow>
+              <th />
+              <th>PRODUTO</th>
+              <th>QTD</th>
+              <th>SUBTOTAL</th>
+            </Styled.TableRow>
+          </Styled.TableHead>
 
-        <Styled.TableBody>
-          {itemsById.map((item, index) => (
-            <Styled.TableRow key={item.id}>
-              <Styled.TableData>
-                <img src={item.image} alt="shoes" />
-              </Styled.TableData>
-              <Styled.TableData>
-                <p>{item.title}</p>
-                <span>{item.price}</span>
-              </Styled.TableData>
-              <Styled.TableData>
-                <Styled.SectionUpdateProductQuantity>
-                  <AiOutlineMinusCircle
-                    size={25}
-                    fill="#7160C3"
-                    name="remove-quantity-item"
-                    onClick={() => removeItem(item.id)}
-                  />
-                  <span className="quantityItem">
-                    {items[index]?.quantity || 0}
-                  </span>
-                  <AiOutlinePlusCircle
-                    size={25}
-                    name="add-quantity-item"
-                    fill="#7160C3"
-                    onClick={() => addItem(item.id)}
-                  />
-                </Styled.SectionUpdateProductQuantity>
-              </Styled.TableData>
-              <Styled.TableData>
-                <Styled.SectionSubtotal>
+          <Styled.TableBody>
+            {itemsById.map((item, index) => (
+              <Styled.TableRow key={item.id}>
+                <Styled.TableData>
+                  <img src={item.image} alt="shoes" />
+                </Styled.TableData>
+                <Styled.TableData>
+                  <p>{item.title}</p>
                   <span>{item.price}</span>
-                  <AiTwotoneDelete
-                    size={25}
-                    name="delete-item"
-                    fill="#7160C3"
-                    onClick={() => deleteItem(item.id)}
-                  />
-                </Styled.SectionSubtotal>
+                </Styled.TableData>
+                <Styled.TableData>
+                  <Styled.SectionUpdateProductQuantity>
+                    <AiOutlineMinusCircle
+                      size={25}
+                      fill="#7160C3"
+                      name="remove-quantity-item"
+                      onClick={() => removeItem(item.id)}
+                    />
+                    <span className="quantityItem">
+                      {items[index]?.quantity || 0}
+                    </span>
+                    <AiOutlinePlusCircle
+                      size={25}
+                      name="add-quantity-item"
+                      fill="#7160C3"
+                      onClick={() => addItem(item.id)}
+                    />
+                  </Styled.SectionUpdateProductQuantity>
+                </Styled.TableData>
+                <Styled.TableData>
+                  <Styled.SectionSubtotal>
+                    <span>{item.price}</span>
+                    <AiTwotoneDelete
+                      size={25}
+                      name="delete-item"
+                      fill="#7160C3"
+                      onClick={() => deleteItem(item.id)}
+                    />
+                  </Styled.SectionSubtotal>
+                </Styled.TableData>
+              </Styled.TableRow>
+            ))}
+          </Styled.TableBody>
+
+          <Styled.TableFooter>
+            <Styled.TableRow>
+              <Styled.TableData>
+                <Styled.Button>Finalizar Pedido</Styled.Button>
+              </Styled.TableData>
+              <Styled.TableData />
+              <Styled.TableData />
+              <Styled.TableData>
+                <span>TOTAL </span>
+                {totalPriceOfList}
               </Styled.TableData>
             </Styled.TableRow>
-          ))}
-        </Styled.TableBody>
-
-        <Styled.TableFooter>
-          <Styled.TableRow>
-            <Styled.TableData>
-              <Styled.Button>Finalizar Pedido</Styled.Button>
-            </Styled.TableData>
-            <Styled.TableData />
-            <Styled.TableData />
-            <Styled.TableData>
-              <span>TOTAL </span>
-              {totalPriceOfList}
-            </Styled.TableData>
-          </Styled.TableRow>
-        </Styled.TableFooter>
-      </Styled.Table>
-    </Styled.Container>
+          </Styled.TableFooter>
+        </Styled.Table>
+      </Styled.Container>
+      {!!items.length && <Footer />}
+    </>
   );
 }

@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 
 import { api } from '@services/axios';
-import { ItemsExposition, ItemsList } from '@templates/itemsExposiotion';
-import { BrandFilter } from '@components/filters/brand';
+import { useItemsBySearchContext } from '@contexts/itemsBySearchForm';
 
+import { ItemsExposition, ItemsList } from '@templates/itemsExposiotion';
+
+import { BrandFilter } from '@components/filters/brand';
+import { FormSearchByPrice } from '@components/searchByPrice';
 import { Loading } from '@components/loading';
 import { SizeFilter } from '@components/filters/size';
 import { ColorFilter } from '@components/filters/color';
+import { Footer } from '@components/footer';
 
 import * as Styled from '@styles/pages/homePage/styled';
-import { useItemsBySearchContext } from '@contexts/itemsBySearchForm';
 
 export default function Home(): JSX.Element {
   const [items, setItems] = useState<ItemsList>([]);
@@ -296,10 +299,16 @@ export default function Home(): JSX.Element {
               />
             </ul>
           </Styled.ColorFilters>
+
+          <Styled.FormSearchByPrice>
+            <p>Preço</p>
+            <FormSearchByPrice />
+          </Styled.FormSearchByPrice>
         </div>
       </Styled.FilterSection>
 
       {timeToDisplayItems ? <ItemsExposition itemsList={items} /> : <Loading />}
+      {timeToDisplayItems && <Footer />}
     </Styled.Container>
   ) : (
     <Styled.MessageInfo>

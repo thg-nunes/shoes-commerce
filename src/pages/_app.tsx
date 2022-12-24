@@ -11,7 +11,6 @@ import { Header } from '@components/header';
 
 import { theme } from '@styles/theme';
 import { GlobalStyles } from '@styles/global-styles';
-import { Footer } from '@components/footer';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -20,7 +19,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <ItemsBySearchProvider>
           <Header />
           <Component {...pageProps} />
-          <Footer />
         </ItemsBySearchProvider>
       </CartProvider>
       <GlobalStyles />
