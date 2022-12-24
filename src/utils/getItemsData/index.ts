@@ -67,12 +67,9 @@ const searchByPrice = async ({
   lowestPrice,
   highestPrice,
 }: SearchByPriceProps): Promise<Response> => {
-  const { data } = await api.get<Response>(`/api/search/price`, {
-    data: {
-      lowestPrice,
-      highestPrice,
-    },
-  });
+  const { data } = await api.get<Response>(
+    `/api/search/price/${lowestPrice}/${highestPrice}`
+  );
 
   return data;
 };
