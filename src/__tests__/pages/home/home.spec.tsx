@@ -6,7 +6,7 @@ import { api } from '@services/axios';
 
 import { useCartContext } from '@contexts/shoppingCart/cart';
 
-import Home from '@pages/home';
+import Home from '@pages/c-shoes/home';
 import { theme } from '@styles/theme';
 import { renderTheme } from '@styles/render-theme';
 import { ThemeProvider } from 'styled-components';

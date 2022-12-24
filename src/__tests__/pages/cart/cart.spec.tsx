@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import Cart from '@pages/cart';
+import Cart from '@pages/c-shoes/cart';
 
 import {
   searchItemById,
