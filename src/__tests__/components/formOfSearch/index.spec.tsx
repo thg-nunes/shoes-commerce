@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 
 import { useItemsBySearchContext } from '@contexts/itemsBySearchForm';
 import { searchItemByFormText } from '@utils/getItemsData';
 
 import { ShoeSearchForm } from '@components/shoeSearchForm';
 import { renderTheme } from '@styles/render-theme';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '@styles/theme';
 
 jest.mock('react', () => {
   return {
@@ -23,6 +21,7 @@ jest.mock('@contexts/itemsBySearchForm', () => {
 jest.mock('@utils/getItemsData', () => {
   return {
     searchItem: jest.fn(),
+    searchByPrice: jest.fn(),
     searchItemById: jest.fn(),
     timeToDisplayItems: jest.fn(),
     searchItemByFormText: jest.fn(),
@@ -34,7 +33,7 @@ const useStateMock = useState as jest.Mock;
 const useItemsBySearchContextMock = useItemsBySearchContext as jest.Mock;
 const searchItemByFormTextMock = searchItemByFormText as jest.Mock;
 
-describe('', () => {
+describe('<ShoeSearchForm />', () => {
   const initialInputValue = '';
   const setInputValue = jest.fn();
   const itemsBySearchFormResponse = [
@@ -57,12 +56,12 @@ describe('', () => {
   const setItemsBySearchForm = jest.fn();
 
   beforeEach(() => {
-    useStateMock.mockReturnValueOnce([initialInputValue, setInputValue]);
+    useStateMock.mockReturnValue([initialInputValue, setInputValue]);
     searchItemByFormTextMock.mockResolvedValueOnce({
       status: 'success',
       items: itemsBySearchFormResponse,
     });
-    useItemsBySearchContextMock.mockReturnValueOnce({
+    useItemsBySearchContextMock.mockReturnValue({
       itemsBySearch: itemsBySearchFormInitialValue,
       setItemsBySearch: setItemsBySearchForm,
     });
@@ -87,7 +86,14 @@ describe('', () => {
 
     expect(setInputValue).toHaveBeenCalledWith('Nike preto');
 
-    fireEvent.submit(form);
+    useStateMock.mockReturnValueOnce(['Nike preto', setInputValue]);
+
+    renderTheme(<ShoeSearchForm />);
+
+    const [_, inputFormWithVale] =
+      screen.getAllByPlaceholderText('Pesquisar...');
+
+    fireEvent.submit(inputFormWithVale.parentElement);
 
     expect(searchItemByFormTextMock).toHaveBeenCalled();
 
