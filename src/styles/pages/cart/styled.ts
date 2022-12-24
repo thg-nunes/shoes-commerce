@@ -10,6 +10,7 @@ export const Container = styled.main<MainProps>`
   display: ${({ hasItemInCartList }) => (hasItemInCartList ? 'block' : 'none')};
   max-width: 1280px;
   margin: 0 auto;
+  margin-bottom: 4rem;
 
   background: ${({ theme }) => theme.colors.white[100]};
 
