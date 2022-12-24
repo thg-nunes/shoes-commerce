@@ -11,7 +11,7 @@ export function Header(): JSX.Element {
 
   return (
     <Styled.Container>
-      <Link href="/" passHref>
+      <Link href="/c-shoes/home" passHref>
         <a>
           <Styled.Logo>
             <h3>COMMERCE-SHOES</h3>
@@ -21,7 +21,7 @@ export function Header(): JSX.Element {
       </Link>
       <Styled.CartAndInputForm>
         <ShoeSearchForm />
-        <Link href="/cart" passHref>
+        <Link href="/c-shoes/cart" passHref>
           <a>
             <Styled.ShoppingCart>
               <Styled.TextSection>
