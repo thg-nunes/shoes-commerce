@@ -20,7 +20,7 @@ export default function returnItemsByBrand(
         break;
       case 'size':
         items.data.forEach((item) =>
-          item[fildSelected].map((element) => {
+          item[fildSelected].forEach((element) => {
             if (element === Number(value)) {
               responseByBrand.push(item);
             }
