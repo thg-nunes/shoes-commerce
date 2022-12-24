@@ -8,6 +8,7 @@ module.exports = {
     '!src/**/*_app.tsx',
     '!src/**/*_document.tsx',
     '!<rootDir>/src/pages/api/**/*.{js,jsx,ts,tsx}',
+    '!<rootDir>/src/pages/index.tsx',
     '!<rootDir>/src/components/**/*.{js,ts}',
     '!<rootDir>/src/templates/**/*.{js,ts}',
     '!<rootDir>/src/utils/**/*.{js,ts}',
