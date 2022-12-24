@@ -21,6 +21,20 @@ export const Logo = styled.section`
 
   gap: 0.5rem;
   line-height: 4rem;
+
+  @media (max-width: 540px) {
+    width: max-content;
+    gap: 0.25rem;
+
+    svg {
+      width: 25px;
+    }
+
+    h3 {
+      line-height: 2rem;
+      font-size: 0.85rem;
+    }
+  }
 `;
 
 export const ShoppingCart = styled.section`
@@ -29,6 +43,12 @@ export const ShoppingCart = styled.section`
 
   height: 4rem;
   gap: 0.5rem;
+
+  @media (max-width: 540px) {
+    svg {
+      display: none;
+    }
+  }
 `;
 
 export const TextSection = styled.section`
@@ -38,6 +58,11 @@ export const TextSection = styled.section`
 
   p {
     font-size: 0.9rem;
+
+    @media (max-width: 540px) {
+      width: max-content;
+      font-size: 0.8rem;
+    }
   }
 
   span {

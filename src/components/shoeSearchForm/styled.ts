@@ -9,6 +9,16 @@ export const Container = styled.form`
     min-width: 30px;
     min-height: 30px;
     background: ${({ theme }) => theme.colors.white[100]};
+
+    @media (max-width: 768px) {
+      min-width: 28px;
+      min-height: 28px;
+    }
+
+    @media (max-width: 540px) {
+      min-width: 26px;
+      min-height: 26px;
+    }
   }
 `;
 
