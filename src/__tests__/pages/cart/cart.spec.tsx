@@ -98,7 +98,7 @@ describe('<Cart /> | Test E2E of cart page', () => {
       .mockReturnValueOnce([[], setItemsDataMock])
       .mockReturnValueOnce([[], setItemsByIdMock]);
 
-    useCartContextMock.mockReturnValueOnce({
+    useCartContextMock.mockReturnValue({
       items: [
         { id: 'ca19c56-86c2-40f2-b2ff-91d82d337600', quantity: 1 },
         { id: 'ca13-8c2-40f2-b2ff-91d837600', quantity: 3 },

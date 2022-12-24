@@ -108,8 +108,13 @@ describe('<Home /> | Test E2E of home page', () => {
       items: [],
     });
 
+    useItemsBySearchContextMock.mockReturnValue({
+      itemsBySearch: [],
+    });
+
     useItemsBySearchContextMock.mockReturnValueOnce({
       itemsBySearch: itemsBySearchInitialValue,
+      setItemsBySearch: jest.fn(),
     });
   });
 
@@ -200,6 +205,29 @@ describe('<Home /> | Test E2E of home page', () => {
     const titleOfItemSearched = await screen.findByText(
       'Tênis Nike Caminhada Confortável Detalhes Couro Masculino Preto.'
     );
+
     expect(titleOfItemSearched).toBeInTheDocument();
+
+    const itemsBySearchOfSearchByPrice = [
+      {
+        id: 'ca19c56-86c2-40f2-b2ff-91d82d337600',
+        brand: 'Nike',
+        title:
+          'Tênis Nike Caminhada Confortável Detalhes Couro Masculino Preto.',
+        description:
+          'Tênis Nike Caminhada Confortável Detalhes Couro Masculino Preto, esse é o top de vendas, possui boa qualidade e acabamento e também uma boa longividade de vida util.',
+        image:
+          'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/modulo-redux/tenis2.jpg',
+        size: 29,
+        color: 'black',
+        stockQuantityQuantity: 9,
+        price: 189.9,
+      },
+    ];
+
+    useStateMock.mockReturnValueOnce([
+      itemsBySearchOfSearchByPrice,
+      setItemsMock,
+    ]);
   });
 });
