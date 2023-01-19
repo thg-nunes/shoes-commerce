@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
 import axios from 'axios';
@@ -13,7 +14,7 @@ import { ColorFilter } from '@components/filters/color';
 import { Footer } from '@components/footer';
 
 import * as Styled from '@styles/pages/homePage/styled';
-import Head from 'next/head';
+import { MessageAndLink } from '@components/messageAndLink';
 
 export default function Home(): JSX.Element {
   const [items, setItems] = useState<ItemsList>([]);
@@ -321,10 +322,11 @@ export default function Home(): JSX.Element {
           {timeToDisplayItems && <Footer />}
         </Styled.Container>
       ) : (
-        <Styled.MessageInfo>
-          <h2>Sem estoque para a opção desejada.</h2>
-          <a href="/c-shoes/home">Voltar ao inicio.</a>
-        </Styled.MessageInfo>
+        <MessageAndLink
+          href="/c-shoes/home"
+          textLink="Voltar ao inicio."
+          textMessage="Sem estoque para a opção desejada."
+        />
       )}
     </>
   );
