@@ -6,6 +6,14 @@ export const Container = styled.footer`
   svg {
     fill: ${({ theme }) => theme.colors.pink[300]};
   }
+
+  @media (max-width: 540px) {
+    width: 95%;
+    margin: 0 auto;
+
+    padding: 0 0.5rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 export const FooterIcons = styled.div`
@@ -15,6 +23,12 @@ export const FooterIcons = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1rem 0;
+
+  @media (max-width: 540px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem 0;
+  }
 `;
 
 export const Truck = styled.section`
