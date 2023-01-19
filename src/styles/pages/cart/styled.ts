@@ -17,6 +17,11 @@ export const Container = styled.main<MainProps>`
   @media (max-width: 1366px) {
     width: 95%;
   }
+
+  @media (max-width: 540px) {
+    overflow: hidden;
+    overflow-x: scroll;
+  }
 `;
 
 export const Table = styled.table`
@@ -111,8 +116,18 @@ export const TableFooter = styled.tfoot`
 
   @media (max-width: 540px) {
     tr {
-      td:nth-child(3) {
-        display: none;
+      td {
+        :nth-child(3) {
+          display: none;
+        }
+
+        :last-child {
+          font-size: 0.9rem;
+
+          span {
+            font-size: 0.9rem;
+          }
+        }
       }
     }
   }
