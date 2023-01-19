@@ -19,7 +19,7 @@ export const Container = styled.div`
     }
 
     @media (max-width: 540px) {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
     }
   }
 `;
