@@ -2,7 +2,7 @@ import AxiosMock from 'axios-mock-adapter';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React, { useEffect, useState } from 'react';
 
-import { api } from '@services/axios';
+import axios from 'axios';
 
 import { useCartContext } from '@contexts/shoppingCart/cart';
 
@@ -12,7 +12,7 @@ import { renderTheme } from '@styles/render-theme';
 import { ThemeProvider } from 'styled-components';
 import { useItemsBySearchContext } from '@contexts/itemsBySearchForm';
 
-const apiMock = new AxiosMock(api);
+const apiMock = new AxiosMock(axios);
 
 jest.mock('react', () => {
   return {

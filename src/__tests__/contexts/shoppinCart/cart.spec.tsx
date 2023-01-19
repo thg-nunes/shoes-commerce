@@ -6,7 +6,7 @@ import { act } from 'react-dom/test-utils';
 import { waitFor } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 
-import { api } from '@services/axios';
+import axios from 'axios';
 import { CartProvider, useCartContext } from '@contexts/shoppingCart/cart';
 
 jest.mock('react', () => {
@@ -27,7 +27,7 @@ const toastError = toast.error as jest.Mock;
 const toastWarn = toast.warn as jest.Mock;
 const toastInfo = toast.info as jest.Mock;
 
-const apiMock = new AxiosMock(api);
+const apiMock = new AxiosMock(axios);
 const useStateMock = useState as jest.Mock;
 
 describe('contexts/shoppingCart', () => {
