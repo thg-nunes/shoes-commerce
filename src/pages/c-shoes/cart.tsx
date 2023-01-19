@@ -11,7 +11,6 @@ import { searchItemById } from '@utils/getItemsData';
 import { useReturnTotalPriceOfItems } from '@utils/getItemsData';
 
 import { ItemsList } from '@templates/itemsExposiotion';
-import { Footer } from '@components/footer';
 
 import * as Styled from '@styles/pages/cart/styled';
 import Head from 'next/head';
@@ -144,7 +143,6 @@ export default function Cart(): JSX.Element {
           </Styled.TableFooter>
         </Styled.Table>
       </Styled.Container>
-      {!!items.length && <Footer />}
     </>
   );
 }

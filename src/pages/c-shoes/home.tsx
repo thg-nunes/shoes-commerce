@@ -61,7 +61,6 @@ export default function Home(): JSX.Element {
           ) : (
             <Loading />
           )}
-          {timeToDisplayItems && <Footer />}
         </Styled.Container>
       ) : (
         <MessageAndLink
