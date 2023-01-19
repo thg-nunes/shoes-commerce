@@ -46,6 +46,18 @@ const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.colors.white[100]};
     background-color: ${({ theme }) => theme.colors.gray[700]};
   }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
 `;
 
 export { GlobalStyles };
