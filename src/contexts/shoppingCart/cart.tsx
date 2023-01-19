@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import { api } from '@services/axios';
+import axios from 'axios';
 
 export type ItemsOfTheCart = {
   id: string;
@@ -48,7 +48,7 @@ function CartProvider({ children }: CartProviderProps): JSX.Element {
   }, []);
 
   async function addItem(id: string): Promise<void> {
-    const { data } = await api.get<AddItemResponse>(`/api/item/${id}`);
+    const { data } = await axios.get<AddItemResponse>(`/api/item/${id}`);
 
     const requisitionItem = data.items[0];
 

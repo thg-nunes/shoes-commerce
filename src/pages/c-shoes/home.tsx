@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { api } from '@services/axios';
+import axios from 'axios';
 import { useItemsBySearchContext } from '@contexts/itemsBySearchForm';
 
 import { ItemsExposition, ItemsList } from '@templates/itemsExposiotion';
@@ -33,7 +33,7 @@ export default function Home(): JSX.Element {
       } else {
         setTimeToDisplayItems(false);
 
-        const { data } = await api.get('/api/items/all');
+        const { data } = await axios.get('/api/items/all');
         setItems(data.items.data);
 
         setTimeout(() => {

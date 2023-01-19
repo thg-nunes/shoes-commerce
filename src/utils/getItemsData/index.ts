@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Dispatch, SetStateAction } from 'react';
 
-import { api } from '@services/axios';
+import axios from 'axios';
 import { ItemsOfTheCart } from '@contexts/shoppingCart/cart';
 
 import { ItemsList } from '@templates/itemsExposiotion';
@@ -56,7 +56,7 @@ const searchItem = async ({
   searchBy,
   filterOf,
 }: SearchItemProps): Promise<Response> => {
-  const { data } = await api.get<Response>(
+  const { data } = await axios.get<Response>(
     `/api/search/fild/${filterOf}/${searchBy}`
   );
 
@@ -67,7 +67,7 @@ const searchByPrice = async ({
   lowestPrice,
   highestPrice,
 }: SearchByPriceProps): Promise<Response> => {
-  const { data } = await api.get<Response>(
+  const { data } = await axios.get<Response>(
     `/api/search/price/${lowestPrice}/${highestPrice}`
   );
 
@@ -78,7 +78,7 @@ const searchItemById = async ({
   id,
 }: SearchItemByIdProps): Promise<Response> => {
   try {
-    const { data } = await api.get<Response>(`/api/item/${id}`);
+    const { data } = await axios.get<Response>(`/api/item/${id}`);
 
     return data;
   } catch {
@@ -130,7 +130,9 @@ const useReturnTotalPriceOfItems = ({
 const searchItemByFormText = async ({
   searchValue,
 }: SearchOfTheFormParams): Promise<Response> => {
-  const { data } = await api.get<Response>(`/api/search/byForm/${searchValue}`);
+  const { data } = await axios.get<Response>(
+    `/api/search/byForm/${searchValue}`
+  );
 
   return data;
 };
