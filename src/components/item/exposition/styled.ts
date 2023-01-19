@@ -21,10 +21,6 @@ export const Container = styled.div`
 
     text-align: center;
     width: 200px;
-
-    @media (max-width: 540px) {
-      width: 140px;
-    }
   }
 `;
 
