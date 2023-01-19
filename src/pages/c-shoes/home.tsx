@@ -326,7 +326,6 @@ export default function Home(): JSX.Element {
           <a href="/c-shoes/home">Voltar ao inicio.</a>
         </Styled.MessageInfo>
       )}
-      ;
     </>
   );
 }
