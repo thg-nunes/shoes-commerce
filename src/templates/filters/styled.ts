@@ -1,3 +1,5 @@
+import { Container } from '@components/searchByPrice/styled';
+
 import styled from 'styled-components';
 
 export const FilterSection = styled.section`
@@ -15,10 +17,33 @@ export const FilterSection = styled.section`
     font-size: 1.3rem;
     font-weight: 600;
     text-align: center;
+
+    ::after {
+      content: ' |';
+
+      @media (max-width: 540px) {
+        content: '';
+      }
+    }
+
+    @media (max-width: 540px) {
+      margin: 0 auto;
+      text-decoration: underline;
+    }
   }
 
   > div {
     display: flex;
+
+    @media (max-width: 540px) {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  @media (max-width: 540px) {
+    flex-direction: column;
+    height: 100vh;
   }
 `;
 
@@ -34,6 +59,10 @@ export const BrandFilters = styled.section`
     transition: all 250ms ease-in-out;
 
     :hover {
+      background: ${({ theme }) => theme.colors.pink[400]};
+    }
+
+    @media (max-width: 540px) {
       background: ${({ theme }) => theme.colors.pink[400]};
     }
   }
@@ -61,12 +90,20 @@ export const BrandFilters = styled.section`
         background: ${({ theme }) => theme.colors.pink[400]};
       }
     }
+
+    @media (max-width: 540px) {
+      position: relative;
+    }
   }
 
   :hover {
     ul {
       height: auto;
     }
+  }
+
+  @media (max-width: 540px) {
+    width: 100%;
   }
 `;
 
@@ -81,7 +118,29 @@ export const FormSearchByPrice = styled(BrandFilters)`
 
       border-top: 1px solid ${({ theme }) => theme.colors.gray[250]};
 
+      @media (max-width: 540px) {
+        border-bottom: 1px solid ${({ theme }) => theme.colors.gray[250]};
+      }
+
       padding: 1rem;
+    }
+  }
+
+  @media (max-width: 540px) {
+    ${Container} {
+      form {
+        width: 100%;
+
+        input {
+          max-width: none;
+          width: 90%;
+        }
+
+        button {
+          width: 50%;
+          margin: 0 auto;
+        }
+      }
     }
   }
 `;

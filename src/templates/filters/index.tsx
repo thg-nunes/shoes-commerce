@@ -22,7 +22,7 @@ export function FiltersTemplate({
 }: FiltersTemplateProps): JSX.Element {
   return (
     <Styled.FilterSection>
-      <span>Filtros |</span>
+      <span>Filtros</span>
 
       <div>
         <Styled.BrandFilters>
