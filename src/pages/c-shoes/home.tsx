@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { useItemsBySearchContext } from '@contexts/itemsBySearchForm';
 
@@ -8,12 +8,19 @@ import { ItemsExposition, ItemsList } from '@templates/itemsExposiotion';
 import { FiltersTemplate } from '@templates/filters';
 
 import { Loading } from '@components/loading';
-import { Footer } from '@components/footer';
 import { MessageAndLink } from '@components/messageAndLink';
 
 import * as Styled from '@styles/pages/homePage/styled';
 
-export default function Home(): JSX.Element {
+type HomeProps = {
+  menuMobileVisible: boolean;
+  setMenuMobileVisible: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function Home({
+  menuMobileVisible,
+  setMenuMobileVisible,
+}: HomeProps): JSX.Element {
   const [items, setItems] = useState<ItemsList>([]);
   const [timeToDisplayItems, setTimeToDisplayItems] = useState(false);
   const { itemsBySearch } = useItemsBySearchContext();
@@ -52,6 +59,8 @@ export default function Home(): JSX.Element {
         <Styled.Container>
           <FiltersTemplate
             setItems={setItems}
+            menuMobileVisible={menuMobileVisible}
+            setMenuMobileVisible={setMenuMobileVisible}
             timeToDisplayItems={timeToDisplayItems}
             setTimeToDisplayItems={setTimeToDisplayItems}
           />

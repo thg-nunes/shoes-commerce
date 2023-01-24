@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   AiOutlineMinusCircle,
   AiOutlinePlusCircle,
@@ -31,7 +31,11 @@ export type ItemListPriceUpdate = {
   price: string;
 }[];
 
-export default function Cart(): JSX.Element {
+type CartProps = {
+  setMenuMobileVisible: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function Cart({ setMenuMobileVisible }: CartProps): JSX.Element {
   const { items, addItem, removeItem, deleteItem } = useCartContext();
   const [itemsData, setItemsData] = useState<ItemsList>([]);
   const [itemsById, setItemsById] = useState<ItemListPriceUpdate>([]);
@@ -66,6 +70,8 @@ export default function Cart(): JSX.Element {
     };
 
     if (userItemsListJson?.length) getItemsById();
+
+    setMenuMobileVisible(false);
   }, [items]);
 
   return (
