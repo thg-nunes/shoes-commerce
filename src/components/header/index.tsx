@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import { Dispatch, SetStateAction } from 'react';
+
+import { AiOutlineMenu } from 'react-icons/ai';
 import { GiSonicShoes, GiBeachBag } from 'react-icons/gi';
 
 import { useCartContext } from '@contexts/shoppingCart/cart';
@@ -6,7 +9,15 @@ import { useCartContext } from '@contexts/shoppingCart/cart';
 import { ShoeSearchForm } from '@components/shoeSearchForm';
 import * as Styled from './styled';
 
-export function Header(): JSX.Element {
+type HeaderProps = {
+  menuMobileVisible: boolean;
+  setMenuMobileVisible: Dispatch<SetStateAction<boolean>>;
+};
+
+export function Header({
+  menuMobileVisible,
+  setMenuMobileVisible,
+}: HeaderProps): JSX.Element {
   const { items } = useCartContext();
 
   return (
@@ -32,6 +43,10 @@ export function Header(): JSX.Element {
             </Styled.ShoppingCart>
           </a>
         </Link>
+        <AiOutlineMenu
+          size={30}
+          onClick={() => setMenuMobileVisible(!menuMobileVisible)}
+        />
       </Styled.CartAndInputForm>
     </Styled.Container>
   );
