@@ -2,7 +2,11 @@ import { Container } from '@components/searchByPrice/styled';
 
 import styled from 'styled-components';
 
-export const FilterSection = styled.section`
+type FilterSectionProps = {
+  menuMobileVisible: boolean;
+};
+
+export const FilterSection = styled.section<FilterSectionProps>`
   width: 100%;
   display: flex;
   gap: 1rem;
@@ -11,6 +15,7 @@ export const FilterSection = styled.section`
   z-index: 1;
 
   span {
+    position: relative;
     width: max-content;
     display: inline-block;
 
@@ -26,8 +31,22 @@ export const FilterSection = styled.section`
       }
     }
 
+    > svg {
+      display: none;
+
+      @media (max-width: 540px) {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 20%;
+      }
+    }
+
     @media (max-width: 540px) {
-      margin: 0 auto;
+      width: 100%;
+      max-width: none;
+
+      padding: 0.35rem 0;
       text-decoration: underline;
     }
   }
@@ -42,8 +61,21 @@ export const FilterSection = styled.section`
   }
 
   @media (max-width: 540px) {
+    position: sticky;
+    top: 4rem;
+
     flex-direction: column;
     height: 100vh;
+
+    display: ${({ menuMobileVisible }) =>
+      menuMobileVisible ? 'block' : 'none'};
+
+    z-index: 4;
+
+    html {
+      overflow-y: ${({ menuMobileVisible }) =>
+        menuMobileVisible ? 'hidden' : 'scroll'};
+    }
   }
 `;
 
@@ -142,5 +174,25 @@ export const FormSearchByPrice = styled(BrandFilters)`
         }
       }
     }
+  }
+`;
+
+export const GoToCartMobileResponsivity = styled.a`
+  display: none;
+
+  background: ${({ theme }) => theme.colors.pink[400]};
+  padding: 0.35rem 0;
+
+  p {
+    font-weight: 600;
+  }
+
+  @media (max-width: 540px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.25rem;
+    margin-top: 2rem;
   }
 `;
