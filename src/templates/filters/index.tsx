@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import { Dispatch, SetStateAction } from 'react';
+import { IoMdCart, IoMdCloseCircle } from 'react-icons/io';
 
 import { ItemsList } from '@templates/itemsExposiotion';
 
@@ -10,19 +12,29 @@ import { FormSearchByPrice } from '@components/searchByPrice';
 import * as Styled from './styled';
 
 export type FiltersTemplateProps = {
+  menuMobileVisible: boolean;
   timeToDisplayItems: boolean;
   setItems: Dispatch<SetStateAction<ItemsList>>;
+  setMenuMobileVisible: Dispatch<SetStateAction<boolean>>;
   setTimeToDisplayItems: Dispatch<SetStateAction<boolean>>;
 };
 
 export function FiltersTemplate({
   setItems,
+  menuMobileVisible,
   timeToDisplayItems,
+  setMenuMobileVisible,
   setTimeToDisplayItems,
 }: FiltersTemplateProps): JSX.Element {
   return (
-    <Styled.FilterSection>
-      <span>Filtros</span>
+    <Styled.FilterSection menuMobileVisible={menuMobileVisible}>
+      <span>
+        Filtros
+        <IoMdCloseCircle
+          size={25}
+          onClick={() => setMenuMobileVisible(false)}
+        />
+      </span>
 
       <div>
         <Styled.BrandFilters>
@@ -279,6 +291,13 @@ export function FiltersTemplate({
           <p>Preço</p>
           <FormSearchByPrice />
         </Styled.FormSearchByPrice>
+
+        <Link href="/c-shoes/cart" passHref>
+          <Styled.GoToCartMobileResponsivity>
+            <IoMdCart size={20} />
+            <p>Meu Carrinho</p>
+          </Styled.GoToCartMobileResponsivity>
+        </Link>
       </div>
     </Styled.FilterSection>
   );
