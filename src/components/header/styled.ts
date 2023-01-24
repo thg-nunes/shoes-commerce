@@ -9,9 +9,25 @@ export const Container = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: ${({ theme }) => theme.colors.gray[700]};
+
+  > svg {
+    display: none;
+
+    @media (max-width: 540px) {
+      display: block;
+    }
+  }
 
   @media (max-width: 1366px) {
     width: 95%;
+  }
+
+  @media (max-width: 540px) {
+    position: sticky;
+    top: 0;
+
+    z-index: 4;
   }
 `;
 
@@ -45,6 +61,8 @@ export const ShoppingCart = styled.section`
   gap: 0.5rem;
 
   @media (max-width: 540px) {
+    display: none;
+
     svg {
       display: none;
     }
@@ -98,6 +116,14 @@ export const CartAndInputForm = styled.section`
       :focus {
         width: 100%;
       }
+    }
+  }
+
+  > svg {
+    display: none;
+
+    @media (max-width: 540px) {
+      display: block;
     }
   }
 `;
