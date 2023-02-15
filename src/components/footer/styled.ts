@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.footer`
   background: ${({ theme }) => theme.colors.black[400]};
+  z-index: 1;
 
   svg {
     fill: ${({ theme }) => theme.colors.pink[300]};
