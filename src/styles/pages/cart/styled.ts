@@ -1,18 +1,21 @@
 import { Button as ButtonStyle } from '@components/button/paginationComponent/styled';
+import { MessageInfo } from '@components/messageAndLink/styled';
 
 import styled from 'styled-components';
 
-type MainProps = {
+type TableProps = {
   hasItemInCartList: boolean;
 };
 
-export const Container = styled.main<MainProps>`
-  display: ${({ hasItemInCartList }) => (hasItemInCartList ? 'block' : 'none')};
+type ContainerProps = TableProps;
+
+export const Container = styled.main<ContainerProps>`
   max-width: 1280px;
   margin: 0 auto;
   margin-bottom: 4rem;
 
-  background: ${({ theme }) => theme.colors.white[100]};
+  background: ${({ theme, hasItemInCartList }) =>
+    hasItemInCartList ? theme.colors.white[100] : 'transparent'};
 
   @media (max-width: 1366px) {
     width: 95%;
@@ -20,12 +23,20 @@ export const Container = styled.main<MainProps>`
 
   @media (max-width: 540px) {
     overflow: hidden;
-    overflow-x: scroll;
+    overflow-x: ${({ hasItemInCartList }) =>
+      hasItemInCartList ? 'scroll' : 'hidden'};
+
+    ${MessageInfo} {
+      h2 {
+        font-size: 1rem;
+      }
+    }
   }
 `;
 
-export const Table = styled.table`
+export const Table = styled.table<TableProps>`
   width: 100%;
+  display: ${({ hasItemInCartList }) => (hasItemInCartList ? 'block' : 'none')};
 
   padding: ${({ theme }) => theme.spacings.medium};
 `;
