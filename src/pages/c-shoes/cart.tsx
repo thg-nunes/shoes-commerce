@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   AiOutlineMinusCircle,
@@ -11,9 +12,9 @@ import { searchItemById } from '@utils/getItemsData';
 import { useReturnTotalPriceOfItems } from '@utils/getItemsData';
 
 import { ItemsList } from '@templates/itemsExposiotion';
+import { MessageAndLink } from '@components/messageAndLink';
 
 import * as Styled from '@styles/pages/cart/styled';
-import Head from 'next/head';
 
 type StorageItems = {
   id: string;
@@ -80,74 +81,82 @@ export default function Cart({ setMenuMobileVisible }: CartProps): JSX.Element {
         <title>C-SHOES | Cart</title>
       </Head>
       <Styled.Container hasItemInCartList={!!items.length}>
-        <Styled.Table>
-          <Styled.TableHead>
-            <Styled.TableRow>
-              <th />
-              <th>PRODUTO</th>
-              <th>QTD</th>
-              <th>SUBTOTAL</th>
-            </Styled.TableRow>
-          </Styled.TableHead>
+        {items.length ? (
+          <Styled.Table hasItemInCartList={!!items.length}>
+            <Styled.TableHead>
+              <Styled.TableRow>
+                <th />
+                <th>PRODUTO</th>
+                <th>QTD</th>
+                <th>SUBTOTAL</th>
+              </Styled.TableRow>
+            </Styled.TableHead>
 
-          <Styled.TableBody>
-            {itemsById.map((item, index) => (
-              <Styled.TableRow key={item.id}>
-                <Styled.TableData>
-                  <img src={item.image} alt="shoes" />
-                </Styled.TableData>
-                <Styled.TableData>
-                  <p>{item.title}</p>
-                  <span>{item.price}</span>
-                </Styled.TableData>
-                <Styled.TableData>
-                  <Styled.SectionUpdateProductQuantity>
-                    <AiOutlineMinusCircle
-                      size={25}
-                      fill="#7160C3"
-                      name="remove-quantity-item"
-                      onClick={() => removeItem(item.id)}
-                    />
-                    <span className="quantityItem">
-                      {items[index]?.quantity || 0}
-                    </span>
-                    <AiOutlinePlusCircle
-                      size={25}
-                      name="add-quantity-item"
-                      fill="#7160C3"
-                      onClick={() => addItem(item.id)}
-                    />
-                  </Styled.SectionUpdateProductQuantity>
-                </Styled.TableData>
-                <Styled.TableData>
-                  <Styled.SectionSubtotal>
+            <Styled.TableBody>
+              {itemsById.map((item, index) => (
+                <Styled.TableRow key={item.id}>
+                  <Styled.TableData>
+                    <img src={item.image} alt="shoes" />
+                  </Styled.TableData>
+                  <Styled.TableData>
+                    <p>{item.title}</p>
                     <span>{item.price}</span>
-                    <AiTwotoneDelete
-                      size={25}
-                      name="delete-item"
-                      fill="#7160C3"
-                      onClick={() => deleteItem(item.id)}
-                    />
-                  </Styled.SectionSubtotal>
+                  </Styled.TableData>
+                  <Styled.TableData>
+                    <Styled.SectionUpdateProductQuantity>
+                      <AiOutlineMinusCircle
+                        size={25}
+                        fill="#7160C3"
+                        name="remove-quantity-item"
+                        onClick={() => removeItem(item.id)}
+                      />
+                      <span className="quantityItem">
+                        {items[index]?.quantity || 0}
+                      </span>
+                      <AiOutlinePlusCircle
+                        size={25}
+                        name="add-quantity-item"
+                        fill="#7160C3"
+                        onClick={() => addItem(item.id)}
+                      />
+                    </Styled.SectionUpdateProductQuantity>
+                  </Styled.TableData>
+                  <Styled.TableData>
+                    <Styled.SectionSubtotal>
+                      <span>{item.price}</span>
+                      <AiTwotoneDelete
+                        size={25}
+                        name="delete-item"
+                        fill="#7160C3"
+                        onClick={() => deleteItem(item.id)}
+                      />
+                    </Styled.SectionSubtotal>
+                  </Styled.TableData>
+                </Styled.TableRow>
+              ))}
+            </Styled.TableBody>
+
+            <Styled.TableFooter>
+              <Styled.TableRow>
+                <Styled.TableData>
+                  <Styled.Button>Finalizar Pedido</Styled.Button>
+                </Styled.TableData>
+                <Styled.TableData />
+                <Styled.TableData />
+                <Styled.TableData>
+                  <span>TOTAL </span>
+                  {totalPriceOfList}
                 </Styled.TableData>
               </Styled.TableRow>
-            ))}
-          </Styled.TableBody>
-
-          <Styled.TableFooter>
-            <Styled.TableRow>
-              <Styled.TableData>
-                <Styled.Button>Finalizar Pedido</Styled.Button>
-              </Styled.TableData>
-              <Styled.TableData />
-              <Styled.TableData />
-              <Styled.TableData>
-                <span>TOTAL </span>
-                {totalPriceOfList}
-              </Styled.TableData>
-            </Styled.TableRow>
-          </Styled.TableFooter>
-        </Styled.Table>
+            </Styled.TableFooter>
+          </Styled.Table>
+        ) : (
+          <MessageAndLink
+            href="/c-shoes/home"
+            textMessage="Você não possui nenhum produto no carrinho."
+            textLink="Adicionar itens no carrinho."
+          />
+        )}
       </Styled.Container>
     </>
   );
