@@ -6,8 +6,8 @@ export const Container = styled.form`
   justify-content: end;
 
   svg {
-    min-width: 30px;
-    min-height: 30px;
+    min-width: 28px;
+    min-height: 28px;
     background: ${({ theme }) => theme.colors.white[100]};
 
     @media (max-width: 768px) {
